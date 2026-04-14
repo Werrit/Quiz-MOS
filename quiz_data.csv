@@ -1,0 +1,106 @@
+id,module,question,option_a,option_b,option_c,option_d,correct
+1,Module 01: Hiểu biết về CNTT cơ bản,Phần cứng máy tính là gì?,"Các bộ phận cụ thể của máy tính về mặt vật lý như màn hình, chuột, bàn phím,...",Cấu tạo của phần mềm về mặt logic,Cấu tạo của phần mềm về mặt vật lý,Cả 3 phương án đều sai,A
+2,Module 01: Hiểu biết về CNTT cơ bản,Lựa chọn nào cho thấy máy tính xách tay có lợi thế hơn so với máy tính để bàn?,Máy tính xách tay có thể mang đi bất kì đâu,Một máy tính xách tay có thể tái sử dụng các thành phần của nó có thể được sử dụng cho máy tính xách tay khác,Sửa máy tính xách tay ít tốn kém hơn,Máy tính xách tay thường có kích thước lớn hơn máy tính để bàn,A
+3,Module 01: Hiểu biết về CNTT cơ bản,"Trong máy tính, PC là chữ viết tắt của từ nào?",Performance Computer,Personnal Connector,Personal Computer,Printing Computer,C
+4,Module 01: Hiểu biết về CNTT cơ bản,"Một loại máy tính có màn hình cảm ứng, khi sử dụng người dùng có thể dùng bút hoặc công cụ chọn để chạm vào, lựa chọn một đối tượng nào đó hoặc có thể nhập thông tin qua bàn phím ảo tích hợp trong máy là?",Máy tính bảng,Máy chủ,Máy tính để bàn,Máy tính FX500,A
+5,Module 01: Hiểu biết về CNTT cơ bản,Điện thoại thông minh (smartphone) là gì?,Hỗ trợ tất cả các kiểu hệ điều hành,Bền hơn so với điện thoại di động khác,Điện thoại chỉ có chức năng nghe và gọi,Điện thoại tích hợp một nền tảng hệ điều hành di động với nhiều tính năng hỗ trợ tiên tiến,D
+6,Module 01: Hiểu biết về CNTT cơ bản,Thiết bị ngoại vi của máy tính là thiết bị nào?,Máy nghe nhạc Mp3,Máy tính bảng,Sách điện tử,Máy in,D
+7,Module 01: Hiểu biết về CNTT cơ bản,Các thiết bị dùng để nhập dữ liệu vào máy tính là?,Loa máy tính,"Bàn phím, máy ghi hình trực tiếp, chuột, máy quét",Máy fax,Máy in,B
+8,Module 01: Hiểu biết về CNTT cơ bản,Những thiết bị nào sau đây được xếp vào nhóm thiết bị ngoại vi?,"Mainboard, CPU, CD-ROM Drive, Chuột","HDD, CD-ROM Drive, FDD, bàn phím","Bàn phím, chuột, màn hình, máy in","Màn hình, CPU, RAM, Main",C
+9,Module 01: Hiểu biết về CNTT cơ bản,"Các thành phần: RAM, CPU, thiết bị nhập xuất là?",Phần mềm máy tính,Thiết bị lưu trữ,Phần cứng máy tính,Thiết bị mạng và truyền thông,C
+10,Module 01: Hiểu biết về CNTT cơ bản,"Thuật ngữ ""RAM"" là từ viết tắt của cụm từ?",Read Access Memory,Recent Access Memory,Random Access Memory,Read And Modify,C
+11,Module 01: Hiểu biết về CNTT cơ bản,ROM là bộ nhớ gì?,Bộ nhớ tạm thời,Bộ nhớ chỉ đọc,"Bộ nhớ đọc, ghi",Bộ nhớ ngoài,B
+12,Module 01: Hiểu biết về CNTT cơ bản,CPU là gì?,Bộ xử lý trung tâm của máy tính,Thiết bị lưu trữ của máy tính,Thiết bị nhập liệu của máy tính,Thiết bị hiển thị của máy tính,A
+13,Module 01: Hiểu biết về CNTT cơ bản,MB (Megabyte) là đơn vị đo gì?,Đo tốc độ mạng,Đo tốc độ của nguồn máy tính,Độ phân giải màn hình,Đo dung lượng của thiết bị lưu trữ như đĩa cứng,D
+14,Module 01: Hiểu biết về CNTT cơ bản,ROM là viết tắt của từ gì?,Random Only Memory,Read One Memory,Random One Memory,Read Only Memory,D
+15,Module 01: Hiểu biết về CNTT cơ bản,Phát biểu nào là đúng khi nói đến CPU?,CPU được tạo bởi bộ nhớ RAM và ROM,CPU lưu trữ các phần mềm người sử dụng,CPU thường được tích hợp với một chip gọi là vi xử lý,"CPU là viết tắt của Processing Unit, là đơn vị xử lý trung tâm được tích hợp trong một chip được gọi là một vi xử lý, để xử lý dữ liệu và dịch các lệnh của chương trình",D
+16,Module 01: Hiểu biết về CNTT cơ bản,Đơn vị đo thông tin nhỏ nhất của máy tính là gì?,Bit,Byte,Megabyte,Terabyte,A
+17,Module 01: Hiểu biết về CNTT cơ bản,Bit là gì?,Là đơn vị nhỏ nhất của thông tin được sử dụng trong máy tính,Là một phần tử nhỏ mang một trong 2 giá trị 0 và 1,Tất cả các đáp án đều đúng,Là một đơn vị đo thông tin,C
+18,Module 01: Hiểu biết về CNTT cơ bản,1 byte bằng?,2 bit,10 bit,16 bit,8 bit,D
+19,Module 01: Hiểu biết về CNTT cơ bản,1 KB bằng?,1000 bit,1024 byte,1024 bit,1000 byte,B
+20,Module 01: Hiểu biết về CNTT cơ bản,CPU thực hiện công việc nào sau đây?,Lưu trữ dữ liệu,Nhập dữ liệu,Xuất dữ liệu,Xử lý dữ liệu,D
+21,Module 01: Hiểu biết về CNTT cơ bản,Kể tên các loại bộ nhớ trong?,Bộ nhớ truy cập ngẫu nhiên (RAM),Bộ nhớ chỉ đọc (ROM),Đĩa cứng (Hard disk),Bộ nhớ truy cập ngẫu nhiên (RAM) và bộ nhớ chỉ đọc (ROM),D
+22,Module 01: Hiểu biết về CNTT cơ bản,Các thiết bị nào có thể thiếu trong một bộ máy tính?,Bộ nguồn,Ổ đĩa mềm,Bộ nhớ RAM,Màn hình,B
+23,Module 01: Hiểu biết về CNTT cơ bản,Cấu trúc chung của máy tính gồm có những khối chức năng nào?,"Bộ xử lý trung tâm, bộ nhớ, thiết bị nhập/xuất","Bộ xử lý trung tâm, bộ nhớ","Bộ nhớ, thiết bị nhập/xuất, màn hình","Bộ xử lý trung tâm, bộ nhớ, thiết bị nhập",A
+24,Module 01: Hiểu biết về CNTT cơ bản,Các thành phần cơ bản của 1 máy tính?,"CPU, các thiết bị lưu trữ, bộ nhớ","CPU, các thiết bị lưu trữ, bộ nhớ, các thiết bị nhập và các thiết bị xuất dữ liệu","CPU, bộ nhớ, các thiết bị nhập dữ liệu","Bộ nhớ, các thiết bị nhập, thiết bị xuất dữ liệu và con người",B
+25,Module 01: Hiểu biết về CNTT cơ bản,Phát biểu nào là đúng khi nói đến bộ nhớ RAM và ROM?,Bộ nhớ ROM thường được dùng bởi các chương trình ứng dụng để lưu trữ tạm thời. Bộ nhớ RAM được dùng để lưu các file dữ liệu,Bộ nhớ RAM không bị xoá khi máy tính đã tắt. Bộ nhớ ROM bị xoá khi máy tính tắt,"Bộ nhớ RAM là bộ nhớ đọc và ghi, trong khi ROM là bộ nhớ chỉ đọc",RAM và ROM là hai bộ nhớ truy cập ngẫu nhiên,C
+26,Module 01: Hiểu biết về CNTT cơ bản,"Khi đọc các thông số cấu hình của một máy tính thông thường: 2GHZ-320GB-4.00GB, con số 4.00GB chỉ điều gì?",Chỉ tốc độ của bộ vi xử lý,Chỉ dung lượng bộ nhớ truy cập ngẫu nhiên RAM,Chỉ dung lượng của đĩa cứng,Chỉ dung lượng của bộ nhớ chỉ đọc ROM,B
+27,Module 01: Hiểu biết về CNTT cơ bản,Đâu là thiết bị lưu trữ dữ liệu?,Máy in,USB,Webcam,Cần điều khiển,B
+28,Module 01: Hiểu biết về CNTT cơ bản,"Thành phần nào của máy tính có thể ngăn máy tính khởi động, nếu nó bị hư hỏng hoặc kết nối không đúng cách?",Chuột,Bàn phím,Ổ đĩa cứng,Máy in,C
+29,Module 01: Hiểu biết về CNTT cơ bản,Nhóm nào sau đây bao gồm các thiết bị được xếp vào cùng loại?,"Đĩa cứng trong, máy in, các loại đĩa quang (CD, DVD), thẻ nhớ, ổ nhớ di động","Đĩa cứng trong, đĩa cứng ngoài, USB, thẻ nhớ, máy scan, ổ nhớ di động","Máy in, máy scan, màn hình, loa","Đĩa cứng trong, đĩa cứng ngoài, các loại đĩa quang (CD, DVD), thẻ nhớ, ổ nhớ di động",D
+30,Module 01: Hiểu biết về CNTT cơ bản,Máy Scanner được kết nối với máy tính thông qua cổng nào sau đây?,RJ 45,Jack 3.5,USB,RJ 11,C
+31,Module 01: Hiểu biết về CNTT cơ bản,Bàn phím máy tính là thiết bị nào trong các thiết bị sau?,Thiết bị xuất thông tin,Thiết bị lưu trữ thông tin,Thiết bị thoát thông tin,Thiết bị nhập thông tin,D
+32,Module 01: Hiểu biết về CNTT cơ bản,Hãy chỉ ra đâu là thiết bị nhập?,Máy in,Loa,Máy quét,Màn hình,C
+33,Module 01: Hiểu biết về CNTT cơ bản,"Thiết bị nào thực hiện thao tác nhập dữ liệu trong số các thiết bị sau: Màn hình, máy in, máy vẽ, bàn phím, ổ đĩa cứng, ổ đĩa mềm, chuột, loa, máy quét?","Bàn phím, chuột, máy quét","Máy in, màn hình, máy quét, chuột","Máy vẽ, ổ đĩa cứng, ổ đĩa mềm, bàn phím","Máy quét, Loa, chuột, màn hình",A
+34,Module 01: Hiểu biết về CNTT cơ bản,Máy điện tử dùng để thu và lưu giữ hình ảnh một cách tự động thay vì phải dùng phim ảnh là máy gì?,Máy ảnh thường,Webcam,Máy quét ảnh,Máy ảnh kỹ thuật số,D
+35,Module 01: Hiểu biết về CNTT cơ bản,"Máy in và máy quét, thiết bị nào là thiết bị nhập thông tin vào máy tính?",Máy quét,Máy in,Cả hai,Không cái nào,A
+36,Module 01: Hiểu biết về CNTT cơ bản,Thiết bị nào không thể thiếu trong một máy tính?,Ổ đĩa mềm,CPU,Ổ đĩa CD,Máy in,B
+37,Module 01: Hiểu biết về CNTT cơ bản,"Các thiết bị: chuột, bàn phím, máy quét, thuộc khối chức năng nào?",Thiết bị nhập,Thiết bị xuất,Khối xử lý,Các thiết bị lưu trữ,A
+38,Module 01: Hiểu biết về CNTT cơ bản,Hãy chọn nhóm có thiết bị không cùng nhóm với những thiết bị còn lại?,"Bàn phím, chuột, máy scan, máy quét","Bàn phím, chuột, máy quét, máy in, máy chiếu","Máy scan, máy tính bảng, ổ đĩa mềm (FDD)","Màn hình, máy in, máy chủ, điện thoại thông minh",A
+39,Module 01: Hiểu biết về CNTT cơ bản,"Thiết bị nào thực hiện thao tác xuất ra dữ liệu trong số các thiết bị sau: Màn hình, máy in, bàn phím, máy chiếu, ổ đĩa mềm, chuột, loa, máy quét?","Màn hình, Máy in, máy chiếu, loa","Bàn phím, chuột, máy quét, máy in","Máy in, màn hình, máy quét, chuột","Màn hình, ổ đĩa cứng, ổ đĩa mềm, bàn phím",A
+40,Module 01: Hiểu biết về CNTT cơ bản,Thiết bị xuất để đưa ra kết quả đã xử lý cho người sử dụng. Các thiết bị xuất thông dụng hiện nay là?,"Màn hình, ổ cứng","Máy in, ổ mềm","Màn hình, màn hình cảm ứng, máy in, loa, tai nghe","Màn hình, ổ mềm",C
+41,Module 02: Sử dụng máy tính cơ bản,Lệnh Start/Shut down hoặc Turn on / Turn of dùng để làm gì?,Khởi động lại máy tính,Tắt máy tính,Tắt màn hình,Chuyển sang chế độ tiết kiệm điện,B
+42,Module 02: Sử dụng máy tính cơ bản,Có bao nhiêu cách thoát khỏi một chương trình ứng dụng trong hệ điều hành Windows 10?,4,3,2,1,A
+43,Module 02: Sử dụng máy tính cơ bản,"Khi khởi động máy tính, phần mềm nào sau đây sẽ được thực hiện trước?",Phần mềm gõ tiếng Việt,Hệ điều hành,Phần mềm Micrsoft Office,Chương trình diệt virus máy tính,B
+44,Module 02: Sử dụng máy tính cơ bản,Để tắt máy tính đúng cách ta chọn?,Tắt nguồn điện,Bấm nút Power trên hộp máy,"Nhấn nút Start ở góc dưới bên trái màn hình nền, chọn mục Shutdown/ Turn off",Bấm nút Reset trên hộp máy,C
+45,Module 02: Sử dụng máy tính cơ bản,Quy trình tắt máy tính nào sau đây đảm bảo an toàn cho chương trình và dữ liệu?,"Đóng các file chương trình, ghi dữ liệu vào đĩa, Shutdown Windows","Ghi dữ liệu vào đĩa, đóng các file chương trình, Chọn nút Start/Shut down (Turn off)","Đóng các file chương trình, Shutdown Windows, tắt công tắc nguồn",Không có đáp án đúng,B
+46,Module 02: Sử dụng máy tính cơ bản,"Trong Windows 10, để ngắt ổ đĩa USB một cách an toàn, có thể dùng cách nào sau đây?","Kích chuột phải trên biểu tượng USB ở góc phải màn hình, chọn thiết bị cần gỡ bỏ và chọn Eject",Đóng tất cả các chương trình đang chạy,Khởi động lại HĐH Windows,Không có đáp án đúng,A
+47,Module 02: Sử dụng máy tính cơ bản,"Chế độ nghỉ màn hình (Screen Saver) trong Windows 10, có tác dụng gì?",Tiết kiệm năng lượng (màn hình chờ là hình nền màu đen),Bảo mật máy tính (nếu sử dụng chế độ đăng nhập lại bằng mật khẩu),Tất cả các đáp án trên,Có thể tạo ra hiệu ứng đẹp mắt giúp người sử dụng thư giãn trong lúc nghỉ ngơi,C
+48,Module 02: Sử dụng máy tính cơ bản,"Để khởi động lại máy tính, phát biểu nào dưới đây là sai?","Từ cửa sổ màn hình nền nhấn nút Start - Shutdown/Turn off, sau đó chọn mục Restart",Bấm nút Reset trên hộp máy,Bấm nút Power trên hộp máy,"Nhấn tổ hợp phím Ctrl - Alt - Del, chọn mục Restart",C
+49,Module 02: Sử dụng máy tính cơ bản,"Trong hệ điều hành Windows 10, khi người dùng muốn rời khỏi máy tính, có thể dùng cách nào sau đây để khóa máy tính tạm thời?","Bấm Ctrl + N, chọn Lock Computer","Bấm Alt + L, chọn Lock Computer","Bấm Ctrl + Alt + Del, chọn Lock This Computer",Nhấn nút Power,C
+50,Module 02: Sử dụng máy tính cơ bản,Phím tắt nào dùng để đóng cửa sổ hiện hành?,F1,Alt+F4,Tab+F9,F7,B
+51,Module 02: Sử dụng máy tính cơ bản,Phím tắt nào sao chép một đối tượng vào ClipBoard?,Ctrl+X,Ctrl+V,Ctrl+Z,Ctrl+C,D
+52,Module 02: Sử dụng máy tính cơ bản,Phím tắt để cắt một đối tượng vào ClipBoard là gì?,Ctrl+X,Ctrl+M,Ctrl+V,Ctrl+Z,A
+53,Module 02: Sử dụng máy tính cơ bản,Phím tắt được sử dụng để hiển thị thực đơn Start?,Ctrl+Esc,Alt+F4,Alt+Tab,Ctrl+Tab,A
+54,Module 02: Sử dụng máy tính cơ bản,Phím tắt nào để chuyển đổi giữa các cửa sổ trong Windows 10?,Ctrl + T,Alt + O,Alt + Tab,Ctrl + Alt + Tab,C
+55,Module 02: Sử dụng máy tính cơ bản,Muốn xóa ký tự đằng sau con trỏ thì nhấn phím gì?,Home,Delete,End,Ctrl,B
+56,Module 02: Sử dụng máy tính cơ bản,Phần mềm nào dưới đây nếu không được cài đặt máy tính sẽ không hoạt động?,Chrome,Vietkey,Windows,Norton AntiVirus,C
+57,Module 02: Sử dụng máy tính cơ bản,Chức năng nào trong Windows cho phép thiết lập các thông số cho môi trường làm việc?,Control Panel,System Restore,System Informations,Taskbar and Start Menu,A
+58,Module 02: Sử dụng máy tính cơ bản,Chức năng nào cho phép tạo các tài khoản để truy cập vào máy tính?,User Accounts,Windows Explorer,Desktop,Multimedia,A
+59,Module 02: Sử dụng máy tính cơ bản,Hãy chọn một cách khởi động Microsoft Office Word?,Start\ Program\ MD-Word.,Start\ Run\ gõ Word.exe\ Ok,Kích đúp chuột vào biểu tượng shortcut Microsoft Office Word trên màn hình,Kích đúp chuột vào biểu tượng shortcut Microsoft Office Powerpoint,C
+60,Module 02: Sử dụng máy tính cơ bản,Tập tin MS Word 2016 được lưu lại có phần mở rộng định dạng mặc định là:,.docx,.doc,.xlsx,.pdf,A
+61,Module 03: Xử lý văn bản cơ bản,Tổ hợp phím Ctrl+K có tác dụng gì?,Mở hộp thoại Font,Mở hộp thoại Paragraph,Mở hộp thoại tạo các liên kết (Hyperlink),Mở hộp thoại tìm kiếm,C
+62,Module 03: Xử lý văn bản cơ bản,Tổ hợp phím Ctrl + S có chức năng:,Lưu tài liệu,Mở tài liệu,Đóng tài liệu,Tạo tài liệu mới,A
+63,Module 03: Xử lý văn bản cơ bản,Tổ hợp phím Ctrl + N có chức năng gì?,Lưu tài liệu,Tạo tài liệu mới,Mở tài liệu,Đóng tài liệu,B
+64,Module 03: Xử lý văn bản cơ bản,"Trong soạn thảo Microsoft Office Word, công dụng của tổ hợp phím Ctrl + O là?",Mở một file đã lưu trên ổ đĩa máy tính,Mở một file mới,Đóng file đang mở,Lưu file,A
+65,Module 03: Xử lý văn bản cơ bản,Để lưu văn bản hiện thời thành một tên mới ta thực hiện:,File/Save,Home/Save As,Home/Save,File/Save As,D
+66,Module 03: Xử lý văn bản cơ bản,Để chọn (bôi đen) toàn bộ văn bản ta thực hiện:,Click chuột trái 3 lần liên tiếp tại lề phải văn bản,Click chuột phải 3 lần liên tiếp tại lề trên văn bản,Click chuột trái 3 lần liên tiếp tại lề dưới văn bản,Đưa con trỏ vào văn bản đang mở sau đó nhấn Ctrl +A,D
+67,Module 03: Xử lý văn bản cơ bản,Microsoft Excel là công cụ dùng để:,Soạn thảo,Trình chiếu,Tính toán,Gửi thư,C
+68,Module 03: Xử lý văn bản cơ bản,Phần mở rộng mặc định của tệp được tạo bằng Microsoft Excel 2016 là gì?,XLXS,XSLX,XXLS,XLSX,D
+69,Module 04: Sử dụng bảng tính cơ bản,"Trong Microsoft Excel, phương án nào dưới đây không phải là địa chỉ ô?",$12$A,$A$12,A$12,A12,A
+70,Module 04: Sử dụng bảng tính cơ bản,"Trong Microsoft Excel, phương án nào dưới đây là địa chỉ hỗn hợp?",$A12,$A$12,A12$,A12,A
+71,Module 04: Sử dụng bảng tính cơ bản,"Trong bảng tính Excel, vùng là tập hợp nhiều ô kế cận tạo thành hình chữ nhật, địa chỉ vùng được thể hiện như câu nào sau đây là đúng?",B1...H15,B1-H15,B1..H15,B1:H15,D
+72,Module 04: Sử dụng bảng tính cơ bản,Theo mặc định ký tự dạng ngày tháng sẽ được:,Canh đều hai bên,Canh bên phải ô,Canh bên trái ô,Canh giữa ô,B
+73,Module 04: Sử dụng bảng tính cơ bản,Đáp án nào sau đây đúng? Khi nhập dữ liệu vào bảng tính Excel thì:,Dữ liệu kiểu số sẽ mặc định căn lề trái,Dữ liệu kiểu ký tự sẽ mặc định căn lề trái,Dữ liệu kiểu thời gian sẽ mặc định căn lề trái,Dữ liệu kiểu ngày tháng sẽ mặc định căn lề trái,B
+74,Module 04: Sử dụng bảng tính cơ bản,"Trong bảng tính Excel, để sửa dữ liệu trong một ô tính mà không cần nhập lại, ta thực hiện:",F2,F3,F4,F5,A
+75,Module 04: Sử dụng bảng tính cơ bản,"Trong Microsoft Excel, cách nào để đóng một tệp?",Ctrl+F4,Alt+F4,Shift+F4,F4,A
+76,Module 04: Sử dụng bảng tính cơ bản,"Trong Microsoft Excel, cách nào để tạo mới một tệp?",Ctrl + O,Ctrl+N,Ctrl + M,Ctrl + W,B
+77,Module 04: Sử dụng bảng tính cơ bản,Để đổi tên một sheet ta chọn:,Chuột trái lên tên sheet\Delete,Chuột phải lên sheet\Rename,Chuột phải lên sheet\Insert,Cả ba cách đều sai,B
+78,Module 04: Sử dụng bảng tính cơ bản,"Trong bảng tính MS Excel 2016, để giữ cố định hàng hoặc cột trong cửa sổ soạn thảo, ta đánh dấu hàng hoặc cột, chọn:",Thẻ Review – Freeze Panes,Thẻ View – Freeze Panes,Thẻ Page Layout – Freeze Panes,Thẻ Home – Freeze Panes,B
+79,Module 04: Sử dụng bảng tính cơ bản,"Để xoá một hàng, bôi đen hàng và chọn?",Home\Delete\Delete Sheet Rows,Home\Delete\Delete Sheet Columns,Home\Delete\Clear,Insert\Delete\Worksheet,A
+80,Module 04: Sử dụng bảng tính cơ bản,"Để xoá một cột, bôi đen cột và chọn?",Insert\Delete\Delete Sheet Rows,Insert\Delete\Worksheet,Home\Delete\Clear,Home\Delete\Delete Sheet Columns,D
+81,Module 04: Sử dụng bảng tính cơ bản,"Để thay đổi độ rộng của cột, ta thực hiện chức năng nào?",Home\Format\Row Height,Home\Format\Column Width,Home\Format\AutoFit Row Height,Home\Format\AutoFit Column Width,B
+82,Module 04: Sử dụng bảng tính cơ bản,"Trong Powerpoint, phần mở rộng của tên file là nhóm ký tự nào?",ppts,ppt,pptx,pptt,C
+83,Module 04: Sử dụng bảng tính cơ bản,"Trong Powerpoint, thanh công cụ truy cập nhanh có tên là?",Quick Access Toolbar,Quick Toolbar Access,Access Quick Toolbar,Toolbar Quick Access,A
+84,Module 04: Sử dụng bảng tính cơ bản,"Trong Powerpoint 2016, để hủy bỏ thao tác vừa thực hiện, ta ấn tổ hợp phím?",Ctrl + Z,Ctrl + F5,Ctrl + A,Ctrl + X,A
+85,Module 04: Sử dụng bảng tính cơ bản,Mỗi trang trình diễn trong Powerpoint được gọi là?,Một Slide,Một Page,Một Sheet,Một Cơ sở dữ liệu,A
+86,Module 04: Sử dụng bảng tính cơ bản,"Trong Powerpoint 2016, cách nào để thêm 1 Slide mới?",Kích chuột phải vào Slide/New Slide,Kích chuột phải vào Slide/Copy,Kích chuột phải vào Slide/Paste,Kích chuột phải vào Slide/Delete,A
+87,Module 04: Sử dụng bảng tính cơ bản,"Trong Powerpoint 2016, cách nào sau đây cho phép định dạng chung cho toàn bộ các Slide?",View/Notes Page,View/Normal,View/Slide Sorter,View/Slide Master,D
+88,Module 04: Sử dụng bảng tính cơ bản,"Trong Powerpoint 2016, để chuyển tập tin trình diễn sang dạng video?",File / Save As/ Save As Type/ PowerPoint Presentation,File / Save As/ Save As Type/ Windows Media Video,File / Save As/ Save As Type/ PDF,File / Save As/ Save As Type/ Word,B
+89,Module 05: Sử dụng trình chiếu cơ bản,"Trong chương trình MS PowerPoint, chức năng Design/Themes dùng để làm gì?",Định dạng hiệu ứng lật trang,Định dạng hiệu ứng cho các đối tượng trên slide,Định dạng kiểu chữ cho slide,Định dạng giao diện của slide,D
+90,Module 05: Sử dụng trình chiếu cơ bản,"Trong Powerpoint 2016, cách nào để lựa chọn bố cục cho Slide?",Format /Slide Design,Insert/New Slide,Home/New Slide,Home/Layout,D
+91,Module 05: Sử dụng trình chiếu cơ bản,Internet có nghĩa là?,Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các máy tính được liên kết với nhau,Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính trong một cơ quan được liên kết với nhau,Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính được liên kết với nhau,Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính trong một quốc gia được liên kết với nhau,C
+92,Module 05: Sử dụng trình chiếu cơ bản,ISP là viết tắt của?,Internet Service Provider,Internet Server Provider,Internet Super Provider,Không có phương án đúng,A
+93,Module 05: Sử dụng trình chiếu cơ bản,WWW là viết tắt của?,Word Wide Wed,Word Wide Website,Word Wild Web,World Wide Web,D
+94,Module 05: Sử dụng trình chiếu cơ bản,HTTP là gì?,Là giao thức truyền tải siêu văn bản,Là ngôn ngữ để soạn thảo nội dung các trang Web,Là tên của trang web,Là địa chỉ của trang Web,A
+95,Module 05: Sử dụng trình chiếu cơ bản,Địa chỉ nào không phải là địa chỉ trang web?,ninhbinh@yahoo.com,www.laodong.com.vn,ngoisao.net,mail.yahoo.com,A
+96,Module 05: Sử dụng trình chiếu cơ bản,URL là cụm từ viết tắt của?,URL (Universe Resource Internet),URL (Uniform Resource Location),URL (Uniform Resource Locator),Tất cả các đáp án đều đúng,C
+97,Module 05: Sử dụng trình chiếu cơ bản,Internet Explorer là gì?,Trình duyệt web,1 chuẩn mạng cục bộ,Bộ giao thức,Thiết bị kết nối các mạng trên Internet,A
+98,Module 06: Sử dụng Internet cơ bản,Mozilla Firefox là gì?,Trình duyệt web,1 chuẩn mạng cục bộ,Bộ giao thức,Thiết bị kết nối các mạng trên Internet,A
+99,Module 06: Sử dụng Internet cơ bản,Google Chrome là gì?,1 chuẩn mạng cục bộ,Trình duyệt web,Bộ giao thức,Thiết bị kết nối các mạng trên Internet,B
+100,Module 06: Sử dụng Internet cơ bản,Phần mềm nào sau đây không phải là trình duyệt Web?,Internet Explorer,FireBug,Firefox,Chromium,B
+101,Module 06: Sử dụng Internet cơ bản,"Để xem một trang Web, ta cần gõ địa chỉ của trang đó vào đâu?",Thanh công cụ chuẩn của trình duyệt,Thanh địa chỉ của trình duyệt,Thanh liên kết của trình duyệt,Thanh trạng thái của trình duyệt,B
+102,Module 06: Sử dụng Internet cơ bản,Nút Refresh trên thanh công cụ của trình duyệt Web cho phép?,Tải lại một trang web,Đi đến một trang web khác,Trở về trang chủ,Thoát khỏi trình duyệt web,A
+103,Module 06: Sử dụng Internet cơ bản,Tường lửa là gì?,Một hệ thống được xây dựng để đảm bảo an ninh cho công ty,Tường lửa là một thiết bị phần cứng và/hoặc một phần mềm hoạt động trong một môi trường máy tính nối mạng có mục đích chống lại sự xâm nhập trái phép từ Internet,Một hệ thống báo cháy,Một hệ thống bảo mật thông tin,B
+104,Module 06: Sử dụng Internet cơ bản,"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt để thêm một Tab?",Ctrl+T,Ctrl+N,Alt+N,Alt+H,A
+105,Module 06: Sử dụng Internet cơ bản,"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt để đóng một Tab?",Ctrl+Q,Ctrl+W,Ctrl+C,Ctrl+F4,B
