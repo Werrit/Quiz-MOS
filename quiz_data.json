@@ -1,75 +1,2402 @@
-let QUIZ_DATA = [];
-
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.trim());
-  
-  const data = [];
-  let currentLine = '';
-  
-  for (let i = 1; i < lines.length; i++) {
-    currentLine += lines[i];
-    
-    // Count quotes - if odd, line continues
-    const quoteCount = (currentLine.match(/"/g) || []).length;
-    if (quoteCount % 2 !== 0) {
-      currentLine += '\n';
-      continue;
+[
+    {
+        "id":1,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Phần cứng máy tính là gì?",
+        "option_a":"Các bộ phận cụ thể của máy tính về mặt vật lý như màn hình, chuột, bàn phím,...",
+        "option_b":"Cấu tạo của phần mềm về mặt logic",
+        "option_c":"Cấu tạo của phần mềm về mặt vật lý",
+        "option_d":"Cả 3 phương án đều sai",
+        "correct":"A"
+    },
+    {
+        "id":2,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Lựa chọn nào cho thấy máy tính xách tay có lợi thế hơn so với máy tính để bàn?",
+        "option_a":"Máy tính xách tay có thể mang đi bất kì đâu",
+        "option_b":"Một máy tính xách tay có thể tái sử dụng các thành phần của nó có thể được sử dụng cho máy tính xách tay khác",
+        "option_c":"Sửa máy tính xách tay ít tốn kém hơn",
+        "option_d":"Máy tính xách tay thường có kích thước lớn hơn máy tính để bàn",
+        "correct":"A"
+    },
+    {
+        "id":3,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Trong máy tính, PC là chữ viết tắt của từ nào?",
+        "option_a":"Performance Computer",
+        "option_b":"Personnal Connector",
+        "option_c":"Personal Computer",
+        "option_d":"Printing Computer",
+        "correct":"C"
+    },
+    {
+        "id":4,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Một loại máy tính có màn hình cảm ứng, khi sử dụng người dùng có thể dùng bút hoặc công cụ chọn để chạm vào, lựa chọn một đối tượng nào đó hoặc có thể nhập thông tin qua bàn phím ảo tích hợp trong máy là?",
+        "option_a":"Máy tính bảng",
+        "option_b":"Máy chủ",
+        "option_c":"Máy tính để bàn",
+        "option_d":"Máy tính FX500",
+        "correct":"A"
+    },
+    {
+        "id":5,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Điện thoại thông minh (smartphone) là gì?",
+        "option_a":"Hỗ trợ tất cả các kiểu hệ điều hành",
+        "option_b":"Bền hơn so với điện thoại di động khác",
+        "option_c":"Điện thoại chỉ có chức năng nghe và gọi",
+        "option_d":"Điện thoại tích hợp một nền tảng hệ điều hành di động với nhiều tính năng hỗ trợ tiên tiến",
+        "correct":"D"
+    },
+    {
+        "id":6,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thiết bị ngoại vi của máy tính là thiết bị nào?",
+        "option_a":"Máy nghe nhạc Mp3",
+        "option_b":"Máy tính bảng",
+        "option_c":"Sách điện tử",
+        "option_d":"Máy in",
+        "correct":"D"
+    },
+    {
+        "id":7,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Các thiết bị dùng để nhập dữ liệu vào máy tính là?",
+        "option_a":"Loa máy tính",
+        "option_b":"Bàn phím, máy ghi hình trực tiếp, chuột, máy quét",
+        "option_c":"Máy fax",
+        "option_d":"Máy in",
+        "correct":"B"
+    },
+    {
+        "id":8,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Những thiết bị nào sau đây được xếp vào nhóm thiết bị ngoại vi?",
+        "option_a":"Mainboard, CPU, CD-ROM Drive, Chuột",
+        "option_b":"HDD, CD-ROM Drive, FDD, bàn phím",
+        "option_c":"Bàn phím, chuột, màn hình, máy in",
+        "option_d":"Màn hình, CPU, RAM, Main",
+        "correct":"C"
+    },
+    {
+        "id":9,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Các thành phần: RAM, CPU, thiết bị nhập xuất là?",
+        "option_a":"Phần mềm máy tính",
+        "option_b":"Thiết bị lưu trữ",
+        "option_c":"Phần cứng máy tính",
+        "option_d":"Thiết bị mạng và truyền thông",
+        "correct":"C"
+    },
+    {
+        "id":10,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thuật ngữ \"RAM\" là từ viết tắt của cụm từ?",
+        "option_a":"Read Access Memory",
+        "option_b":"Recent Access Memory",
+        "option_c":"Random Access Memory",
+        "option_d":"Read And Modify",
+        "correct":"C"
+    },
+    {
+        "id":11,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"ROM là bộ nhớ gì?",
+        "option_a":"Bộ nhớ tạm thời",
+        "option_b":"Bộ nhớ chỉ đọc",
+        "option_c":"Bộ nhớ đọc, ghi",
+        "option_d":"Bộ nhớ ngoài",
+        "correct":"B"
+    },
+    {
+        "id":12,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"CPU là gì?",
+        "option_a":"Bộ xử lý trung tâm của máy tính",
+        "option_b":"Thiết bị lưu trữ của máy tính",
+        "option_c":"Thiết bị nhập liệu của máy tính",
+        "option_d":"Thiết bị hiển thị của máy tính",
+        "correct":"A"
+    },
+    {
+        "id":13,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"MB (Megabyte) là đơn vị đo gì?",
+        "option_a":"Đo tốc độ mạng",
+        "option_b":"Đo tốc độ của nguồn máy tính",
+        "option_c":"Độ phân giải màn hình",
+        "option_d":"Đo dung lượng của thiết bị lưu trữ như đĩa cứng",
+        "correct":"D"
+    },
+    {
+        "id":14,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"ROM là viết tắt của từ gì?",
+        "option_a":"Random Only Memory",
+        "option_b":"Read One Memory",
+        "option_c":"Random One Memory",
+        "option_d":"Read Only Memory",
+        "correct":"D"
+    },
+    {
+        "id":15,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Phát biểu nào là đúng khi nói đến CPU?",
+        "option_a":"CPU được tạo bởi bộ nhớ RAM và ROM",
+        "option_b":"CPU lưu trữ các phần mềm người sử dụng",
+        "option_c":"CPU thường được tích hợp với một chip gọi là vi xử lý",
+        "option_d":"CPU là viết tắt của Processing Unit, là đơn vị xử lý trung tâm được tích hợp trong một chip được gọi là một vi xử lý, để xử lý dữ liệu và dịch các lệnh của chương trình",
+        "correct":"D"
+    },
+    {
+        "id":16,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Đơn vị đo thông tin nhỏ nhất của máy tính là gì?",
+        "option_a":"Bit",
+        "option_b":"Byte",
+        "option_c":"Megabyte",
+        "option_d":"Terabyte",
+        "correct":"A"
+    },
+    {
+        "id":17,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Bit là gì?",
+        "option_a":"Là đơn vị nhỏ nhất của thông tin được sử dụng trong máy tính",
+        "option_b":"Là một phần tử nhỏ mang một trong 2 giá trị 0 và 1",
+        "option_c":"Tất cả các đáp án đều đúng",
+        "option_d":"Là một đơn vị đo thông tin",
+        "correct":"C"
+    },
+    {
+        "id":18,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"1 byte bằng?",
+        "option_a":"2 bit",
+        "option_b":"10 bit",
+        "option_c":"16 bit",
+        "option_d":"8 bit",
+        "correct":"D"
+    },
+    {
+        "id":19,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"1 KB bằng?",
+        "option_a":"1000 bit",
+        "option_b":"1024 byte",
+        "option_c":"1024 bit",
+        "option_d":"1000 byte",
+        "correct":"B"
+    },
+    {
+        "id":20,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"CPU thực hiện công việc nào sau đây?",
+        "option_a":"Lưu trữ dữ liệu",
+        "option_b":"Nhập dữ liệu",
+        "option_c":"Xuất dữ liệu",
+        "option_d":"Xử lý dữ liệu",
+        "correct":"D"
+    },
+    {
+        "id":21,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Kể tên các loại bộ nhớ trong?",
+        "option_a":"Bộ nhớ truy cập ngẫu nhiên (RAM)",
+        "option_b":"Bộ nhớ chỉ đọc (ROM)",
+        "option_c":"Đĩa cứng (Hard disk)",
+        "option_d":"Bộ nhớ truy cập ngẫu nhiên (RAM) và bộ nhớ chỉ đọc (ROM)",
+        "correct":"D"
+    },
+    {
+        "id":22,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Các thiết bị nào có thể thiếu trong một bộ máy tính?",
+        "option_a":"Bộ nguồn",
+        "option_b":"Ổ đĩa mềm",
+        "option_c":"Bộ nhớ RAM",
+        "option_d":"Màn hình",
+        "correct":"B"
+    },
+    {
+        "id":23,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Cấu trúc chung của máy tính gồm có những khối chức năng nào?",
+        "option_a":"Bộ xử lý trung tâm, bộ nhớ, thiết bị nhập\/xuất",
+        "option_b":"Bộ xử lý trung tâm, bộ nhớ",
+        "option_c":"Bộ nhớ, thiết bị nhập\/xuất, màn hình",
+        "option_d":"Bộ xử lý trung tâm, bộ nhớ, thiết bị nhập",
+        "correct":"A"
+    },
+    {
+        "id":24,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Các thành phần cơ bản của 1 máy tính?",
+        "option_a":"CPU, các thiết bị lưu trữ, bộ nhớ",
+        "option_b":"CPU, các thiết bị lưu trữ, bộ nhớ, các thiết bị nhập và các thiết bị xuất dữ liệu",
+        "option_c":"CPU, bộ nhớ, các thiết bị nhập dữ liệu",
+        "option_d":"Bộ nhớ, các thiết bị nhập, thiết bị xuất dữ liệu và con người",
+        "correct":"B"
+    },
+    {
+        "id":25,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Phát biểu nào là đúng khi nói đến bộ nhớ RAM và ROM?",
+        "option_a":"Bộ nhớ ROM thường được dùng bởi các chương trình ứng dụng để lưu trữ tạm thời. Bộ nhớ RAM được dùng để lưu các file dữ liệu",
+        "option_b":"Bộ nhớ RAM không bị xoá khi máy tính đã tắt. Bộ nhớ ROM bị xoá khi máy tính tắt",
+        "option_c":"Bộ nhớ RAM là bộ nhớ đọc và ghi, trong khi ROM là bộ nhớ chỉ đọc",
+        "option_d":"RAM và ROM là hai bộ nhớ truy cập ngẫu nhiên",
+        "correct":"C"
+    },
+    {
+        "id":26,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Khi đọc các thông số cấu hình của một máy tính thông thường: 2GHZ-320GB-4.00GB, con số 4.00GB chỉ điều gì?",
+        "option_a":"Chỉ tốc độ của bộ vi xử lý",
+        "option_b":"Chỉ dung lượng bộ nhớ truy cập ngẫu nhiên RAM",
+        "option_c":"Chỉ dung lượng của đĩa cứng",
+        "option_d":"Chỉ dung lượng của bộ nhớ chỉ đọc ROM",
+        "correct":"B"
+    },
+    {
+        "id":27,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Đâu là thiết bị lưu trữ dữ liệu?",
+        "option_a":"Máy in",
+        "option_b":"USB",
+        "option_c":"Webcam",
+        "option_d":"Cần điều khiển",
+        "correct":"B"
+    },
+    {
+        "id":28,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thành phần nào của máy tính có thể ngăn máy tính khởi động, nếu nó bị hư hỏng hoặc kết nối không đúng cách?",
+        "option_a":"Chuột",
+        "option_b":"Bàn phím",
+        "option_c":"Ổ đĩa cứng",
+        "option_d":"Máy in",
+        "correct":"C"
+    },
+    {
+        "id":29,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Nhóm nào sau đây bao gồm các thiết bị được xếp vào cùng loại?",
+        "option_a":"Đĩa cứng trong, máy in, các loại đĩa quang (CD, DVD), thẻ nhớ, ổ nhớ di động",
+        "option_b":"Đĩa cứng trong, đĩa cứng ngoài, USB, thẻ nhớ, máy scan, ổ nhớ di động",
+        "option_c":"Máy in, máy scan, màn hình, loa",
+        "option_d":"Đĩa cứng trong, đĩa cứng ngoài, các loại đĩa quang (CD, DVD), thẻ nhớ, ổ nhớ di động",
+        "correct":"D"
+    },
+    {
+        "id":30,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Máy Scanner được kết nối với máy tính thông qua cổng nào sau đây?",
+        "option_a":"RJ 45",
+        "option_b":"Jack 3.5",
+        "option_c":"USB",
+        "option_d":"RJ 11",
+        "correct":"C"
+    },
+    {
+        "id":31,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Bàn phím máy tính là thiết bị nào trong các thiết bị sau?",
+        "option_a":"Thiết bị xuất thông tin",
+        "option_b":"Thiết bị lưu trữ thông tin",
+        "option_c":"Thiết bị thoát thông tin",
+        "option_d":"Thiết bị nhập thông tin",
+        "correct":"D"
+    },
+    {
+        "id":32,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Hãy chỉ ra đâu là thiết bị nhập?",
+        "option_a":"Máy in",
+        "option_b":"Loa",
+        "option_c":"Máy quét",
+        "option_d":"Màn hình",
+        "correct":"C"
+    },
+    {
+        "id":33,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thiết bị nào thực hiện thao tác nhập dữ liệu trong số các thiết bị sau: Màn hình, máy in, máy vẽ, bàn phím, ổ đĩa cứng, ổ đĩa mềm, chuột, loa, máy quét?",
+        "option_a":"Bàn phím, chuột, máy quét",
+        "option_b":"Máy in, màn hình, máy quét, chuột",
+        "option_c":"Máy vẽ, ổ đĩa cứng, ổ đĩa mềm, bàn phím",
+        "option_d":"Máy quét, Loa, chuột, màn hình",
+        "correct":"A"
+    },
+    {
+        "id":34,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Máy điện tử dùng để thu và lưu giữ hình ảnh một cách tự động thay vì phải dùng phim ảnh là máy gì?",
+        "option_a":"Máy ảnh thường",
+        "option_b":"Webcam",
+        "option_c":"Máy quét ảnh",
+        "option_d":"Máy ảnh kỹ thuật số",
+        "correct":"D"
+    },
+    {
+        "id":35,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Máy in và máy quét, thiết bị nào là thiết bị nhập thông tin vào máy tính?",
+        "option_a":"Máy quét",
+        "option_b":"Máy in",
+        "option_c":"Cả hai",
+        "option_d":"Không cái nào",
+        "correct":"A"
+    },
+    {
+        "id":36,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thiết bị nào không thể thiếu trong một máy tính?",
+        "option_a":"Ổ đĩa mềm",
+        "option_b":"CPU",
+        "option_c":"Ổ đĩa CD",
+        "option_d":"Máy in",
+        "correct":"B"
+    },
+    {
+        "id":37,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Các thiết bị: chuột, bàn phím, máy quét, thuộc khối chức năng nào?",
+        "option_a":"Thiết bị nhập",
+        "option_b":"Thiết bị xuất",
+        "option_c":"Khối xử lý",
+        "option_d":"Các thiết bị lưu trữ",
+        "correct":"A"
+    },
+    {
+        "id":38,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Hãy chọn nhóm có thiết bị không cùng nhóm với những thiết bị còn lại?",
+        "option_a":"Bàn phím, chuột, máy scan, máy quét",
+        "option_b":"Bàn phím, chuột, máy quét, máy in, máy chiếu",
+        "option_c":"Máy scan, máy tính bảng, ổ đĩa mềm (FDD)",
+        "option_d":"Màn hình, máy in, máy chủ, điện thoại thông minh",
+        "correct":"A"
+    },
+    {
+        "id":39,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thiết bị nào thực hiện thao tác xuất ra dữ liệu trong số các thiết bị sau: Màn hình, máy in, bàn phím, máy chiếu, ổ đĩa mềm, chuột, loa, máy quét?",
+        "option_a":"Màn hình, Máy in, máy chiếu, loa",
+        "option_b":"Bàn phím, chuột, máy quét, máy in",
+        "option_c":"Máy in, màn hình, máy quét, chuột",
+        "option_d":"Màn hình, ổ đĩa cứng, ổ đĩa mềm, bàn phím",
+        "correct":"A"
+    },
+    {
+        "id":40,
+        "module":"Module 01: Hiểu biết về CNTT cơ bản",
+        "question":"Thiết bị xuất để đưa ra kết quả đã xử lý cho người sử dụng. Các thiết bị xuất thông dụng hiện nay là?",
+        "option_a":"Màn hình, ổ cứng",
+        "option_b":"Máy in, ổ mềm",
+        "option_c":"Màn hình, màn hình cảm ứng, máy in, loa, tai nghe",
+        "option_d":"Màn hình, ổ mềm",
+        "correct":"C"
+    },
+    {
+        "id":41,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Lệnh Start\/Shut down hoặc Turn on \/ Turn of dùng để làm gì?",
+        "option_a":"Khởi động lại máy tính",
+        "option_b":"Tắt máy tính",
+        "option_c":"Tắt màn hình",
+        "option_d":"Chuyển sang chế độ tiết kiệm điện",
+        "correct":"B"
+    },
+    {
+        "id":42,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Có bao nhiêu cách thoát khỏi một chương trình ứng dụng trong hệ điều hành Windows 10?",
+        "option_a":"4",
+        "option_b":"3",
+        "option_c":"2",
+        "option_d":"1",
+        "correct":"A"
+    },
+    {
+        "id":43,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Khi khởi động máy tính, phần mềm nào sau đây sẽ được thực hiện trước?",
+        "option_a":"Phần mềm gõ tiếng Việt",
+        "option_b":"Hệ điều hành",
+        "option_c":"Phần mềm Micrsoft Office",
+        "option_d":"Chương trình diệt virus máy tính",
+        "correct":"B"
+    },
+    {
+        "id":44,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Để tắt máy tính đúng cách ta chọn?",
+        "option_a":"Tắt nguồn điện",
+        "option_b":"Bấm nút Power trên hộp máy",
+        "option_c":"Nhấn nút Start ở góc dưới bên trái màn hình nền, chọn mục Shutdown\/ Turn off",
+        "option_d":"Bấm nút Reset trên hộp máy",
+        "correct":"C"
+    },
+    {
+        "id":45,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Quy trình tắt máy tính nào sau đây đảm bảo an toàn cho chương trình và dữ liệu?",
+        "option_a":"Đóng các file chương trình, ghi dữ liệu vào đĩa, Shutdown Windows",
+        "option_b":"Ghi dữ liệu vào đĩa, đóng các file chương trình, Chọn nút Start\/Shut down (Turn off)",
+        "option_c":"Đóng các file chương trình, Shutdown Windows, tắt công tắc nguồn",
+        "option_d":"Không có đáp án đúng",
+        "correct":"B"
+    },
+    {
+        "id":46,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Trong Windows 10, để ngắt ổ đĩa USB một cách an toàn, có thể dùng cách nào sau đây?",
+        "option_a":"Kích chuột phải trên biểu tượng USB ở góc phải màn hình, chọn thiết bị cần gỡ bỏ và chọn Eject",
+        "option_b":"Đóng tất cả các chương trình đang chạy",
+        "option_c":"Khởi động lại HĐH Windows",
+        "option_d":"Không có đáp án đúng",
+        "correct":"A"
+    },
+    {
+        "id":47,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Chế độ nghỉ màn hình (Screen Saver) trong Windows 10, có tác dụng gì?",
+        "option_a":"Tiết kiệm năng lượng (màn hình chờ là hình nền màu đen)",
+        "option_b":"Bảo mật máy tính (nếu sử dụng chế độ đăng nhập lại bằng mật khẩu)",
+        "option_c":"Tất cả các đáp án trên",
+        "option_d":"Có thể tạo ra hiệu ứng đẹp mắt giúp người sử dụng thư giãn trong lúc nghỉ ngơi",
+        "correct":"C"
+    },
+    {
+        "id":48,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Để khởi động lại máy tính, phát biểu nào dưới đây là sai?",
+        "option_a":"Từ cửa sổ màn hình nền nhấn nút Start - Shutdown\/Turn off, sau đó chọn mục Restart",
+        "option_b":"Bấm nút Reset trên hộp máy",
+        "option_c":"Bấm nút Power trên hộp máy",
+        "option_d":"Nhấn tổ hợp phím Ctrl - Alt - Del, chọn mục Restart",
+        "correct":"C"
+    },
+    {
+        "id":49,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Trong hệ điều hành Windows 10, khi người dùng muốn rời khỏi máy tính, có thể dùng cách nào sau đây để khóa máy tính tạm thời?",
+        "option_a":"Bấm Ctrl + N, chọn Lock Computer",
+        "option_b":"Bấm Alt + L, chọn Lock Computer",
+        "option_c":"Bấm Ctrl + Alt + Del, chọn Lock This Computer",
+        "option_d":"Nhấn nút Power",
+        "correct":"C"
+    },
+    {
+        "id":50,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Phím tắt nào dùng để đóng cửa sổ hiện hành?",
+        "option_a":"F1",
+        "option_b":"Alt+F4",
+        "option_c":"Tab+F9",
+        "option_d":"F7",
+        "correct":"B"
+    },
+    {
+        "id":51,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Phím tắt nào sao chép một đối tượng vào ClipBoard?",
+        "option_a":"Ctrl+X",
+        "option_b":"Ctrl+V",
+        "option_c":"Ctrl+Z",
+        "option_d":"Ctrl+C",
+        "correct":"D"
+    },
+    {
+        "id":52,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Phím tắt để cắt một đối tượng vào ClipBoard là gì?",
+        "option_a":"Ctrl+X",
+        "option_b":"Ctrl+M",
+        "option_c":"Ctrl+V",
+        "option_d":"Ctrl+Z",
+        "correct":"A"
+    },
+    {
+        "id":53,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Phím tắt được sử dụng để hiển thị thực đơn Start?",
+        "option_a":"Ctrl+Esc",
+        "option_b":"Alt+F4",
+        "option_c":"Alt+Tab",
+        "option_d":"Ctrl+Tab",
+        "correct":"A"
+    },
+    {
+        "id":54,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Phím tắt nào để chuyển đổi giữa các cửa sổ trong Windows 10?",
+        "option_a":"Ctrl + T",
+        "option_b":"Alt + O",
+        "option_c":"Alt + Tab",
+        "option_d":"Ctrl + Alt + Tab",
+        "correct":"C"
+    },
+    {
+        "id":55,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Muốn xóa ký tự đằng sau con trỏ thì nhấn phím gì?",
+        "option_a":"Home",
+        "option_b":"Delete",
+        "option_c":"End",
+        "option_d":"Ctrl",
+        "correct":"B"
+    },
+    {
+        "id":56,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Phần mềm nào dưới đây nếu không được cài đặt máy tính sẽ không hoạt động?",
+        "option_a":"Chrome",
+        "option_b":"Vietkey",
+        "option_c":"Windows",
+        "option_d":"Norton AntiVirus",
+        "correct":"C"
+    },
+    {
+        "id":57,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Chức năng nào trong Windows cho phép thiết lập các thông số cho môi trường làm việc?",
+        "option_a":"Control Panel",
+        "option_b":"System Restore",
+        "option_c":"System Informations",
+        "option_d":"Taskbar and Start Menu",
+        "correct":"A"
+    },
+    {
+        "id":58,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Chức năng nào cho phép tạo các tài khoản để truy cập vào máy tính?",
+        "option_a":"User Accounts",
+        "option_b":"Windows Explorer",
+        "option_c":"Desktop",
+        "option_d":"Multimedia",
+        "correct":"A"
+    },
+    {
+        "id":59,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Hãy chọn một cách khởi động Microsoft Office Word?",
+        "option_a":"Start\\ Program\\ MD-Word.",
+        "option_b":"Start\\ Run\\ gõ Word.exe\\ Ok",
+        "option_c":"Kích đúp chuột vào biểu tượng shortcut Microsoft Office Word trên màn hình",
+        "option_d":"Kích đúp chuột vào biểu tượng shortcut Microsoft Office Powerpoint",
+        "correct":"C"
+    },
+    {
+        "id":60,
+        "module":"Module 02: Sử dụng máy tính cơ bản",
+        "question":"Tập tin MS Word 2016 được lưu lại có phần mở rộng định dạng mặc định là:",
+        "option_a":".docx",
+        "option_b":".doc",
+        "option_c":".xlsx",
+        "option_d":".pdf",
+        "correct":"A"
+    },
+    {
+        "id":61,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Tổ hợp phím Ctrl+K có tác dụng gì?",
+        "option_a":"Mở hộp thoại Font",
+        "option_b":"Mở hộp thoại Paragraph",
+        "option_c":"Mở hộp thoại tạo các liên kết (Hyperlink)",
+        "option_d":"Mở hộp thoại tìm kiếm",
+        "correct":"C"
+    },
+    {
+        "id":62,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Tổ hợp phím Ctrl + S có chức năng:",
+        "option_a":"Lưu tài liệu",
+        "option_b":"Mở tài liệu",
+        "option_c":"Đóng tài liệu",
+        "option_d":"Tạo tài liệu mới",
+        "correct":"A"
+    },
+    {
+        "id":63,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Tổ hợp phím Ctrl + N có chức năng gì?",
+        "option_a":"Lưu tài liệu",
+        "option_b":"Tạo tài liệu mới",
+        "option_c":"Mở tài liệu",
+        "option_d":"Đóng tài liệu",
+        "correct":"B"
+    },
+    {
+        "id":64,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Trong soạn thảo Microsoft Office Word, công dụng của tổ hợp phím Ctrl + O là?",
+        "option_a":"Mở một file đã lưu trên ổ đĩa máy tính",
+        "option_b":"Mở một file mới",
+        "option_c":"Đóng file đang mở",
+        "option_d":"Lưu file",
+        "correct":"A"
+    },
+    {
+        "id":65,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Để lưu văn bản hiện thời thành một tên mới ta thực hiện:",
+        "option_a":"File\/Save",
+        "option_b":"Home\/Save As",
+        "option_c":"Home\/Save",
+        "option_d":"File\/Save As",
+        "correct":"D"
+    },
+    {
+        "id":66,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Để chọn (bôi đen) toàn bộ văn bản ta thực hiện:",
+        "option_a":"Click chuột trái 3 lần liên tiếp tại lề phải văn bản",
+        "option_b":"Click chuột phải 3 lần liên tiếp tại lề trên văn bản",
+        "option_c":"Click chuột trái 3 lần liên tiếp tại lề dưới văn bản",
+        "option_d":"Đưa con trỏ vào văn bản đang mở sau đó nhấn Ctrl +A",
+        "correct":"D"
+    },
+    {
+        "id":67,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Microsoft Excel là công cụ dùng để:",
+        "option_a":"Soạn thảo",
+        "option_b":"Trình chiếu",
+        "option_c":"Tính toán",
+        "option_d":"Gửi thư",
+        "correct":"C"
+    },
+    {
+        "id":68,
+        "module":"Module 03: Xử lý văn bản cơ bản",
+        "question":"Phần mở rộng mặc định của tệp được tạo bằng Microsoft Excel 2016 là gì?",
+        "option_a":"XLXS",
+        "option_b":"XSLX",
+        "option_c":"XXLS",
+        "option_d":"XLSX",
+        "correct":"D"
+    },
+    {
+        "id":69,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Microsoft Excel, phương án nào dưới đây không phải là địa chỉ ô?",
+        "option_a":"$12$A",
+        "option_b":"$A$12",
+        "option_c":"A$12",
+        "option_d":"A12",
+        "correct":"A"
+    },
+    {
+        "id":70,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Microsoft Excel, phương án nào dưới đây là địa chỉ hỗn hợp?",
+        "option_a":"$A12",
+        "option_b":"$A$12",
+        "option_c":"A12$",
+        "option_d":"A12",
+        "correct":"A"
+    },
+    {
+        "id":71,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong bảng tính Excel, vùng là tập hợp nhiều ô kế cận tạo thành hình chữ nhật, địa chỉ vùng được thể hiện như câu nào sau đây là đúng?",
+        "option_a":"B1...H15",
+        "option_b":"B1-H15",
+        "option_c":"B1..H15",
+        "option_d":"B1:H15",
+        "correct":"D"
+    },
+    {
+        "id":72,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Theo mặc định ký tự dạng ngày tháng sẽ được:",
+        "option_a":"Canh đều hai bên",
+        "option_b":"Canh bên phải ô",
+        "option_c":"Canh bên trái ô",
+        "option_d":"Canh giữa ô",
+        "correct":"B"
+    },
+    {
+        "id":73,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Đáp án nào sau đây đúng? Khi nhập dữ liệu vào bảng tính Excel thì:",
+        "option_a":"Dữ liệu kiểu số sẽ mặc định căn lề trái",
+        "option_b":"Dữ liệu kiểu ký tự sẽ mặc định căn lề trái",
+        "option_c":"Dữ liệu kiểu thời gian sẽ mặc định căn lề trái",
+        "option_d":"Dữ liệu kiểu ngày tháng sẽ mặc định căn lề trái",
+        "correct":"B"
+    },
+    {
+        "id":74,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong bảng tính Excel, để sửa dữ liệu trong một ô tính mà không cần nhập lại, ta thực hiện:",
+        "option_a":"F2",
+        "option_b":"F3",
+        "option_c":"F4",
+        "option_d":"F5",
+        "correct":"A"
+    },
+    {
+        "id":75,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Microsoft Excel, cách nào để đóng một tệp?",
+        "option_a":"Ctrl+F4",
+        "option_b":"Alt+F4",
+        "option_c":"Shift+F4",
+        "option_d":"F4",
+        "correct":"A"
+    },
+    {
+        "id":76,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Microsoft Excel, cách nào để tạo mới một tệp?",
+        "option_a":"Ctrl + O",
+        "option_b":"Ctrl+N",
+        "option_c":"Ctrl + M",
+        "option_d":"Ctrl + W",
+        "correct":"B"
+    },
+    {
+        "id":77,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Để đổi tên một sheet ta chọn:",
+        "option_a":"Chuột trái lên tên sheet\\Delete",
+        "option_b":"Chuột phải lên sheet\\Rename",
+        "option_c":"Chuột phải lên sheet\\Insert",
+        "option_d":"Cả ba cách đều sai",
+        "correct":"B"
+    },
+    {
+        "id":78,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong bảng tính MS Excel 2016, để giữ cố định hàng hoặc cột trong cửa sổ soạn thảo, ta đánh dấu hàng hoặc cột, chọn:",
+        "option_a":"Thẻ Review – Freeze Panes",
+        "option_b":"Thẻ View – Freeze Panes",
+        "option_c":"Thẻ Page Layout – Freeze Panes",
+        "option_d":"Thẻ Home – Freeze Panes",
+        "correct":"B"
+    },
+    {
+        "id":79,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Để xoá một hàng, bôi đen hàng và chọn?",
+        "option_a":"Home\\Delete\\Delete Sheet Rows",
+        "option_b":"Home\\Delete\\Delete Sheet Columns",
+        "option_c":"Home\\Delete\\Clear",
+        "option_d":"Insert\\Delete\\Worksheet",
+        "correct":"A"
+    },
+    {
+        "id":80,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Để xoá một cột, bôi đen cột và chọn?",
+        "option_a":"Insert\\Delete\\Delete Sheet Rows",
+        "option_b":"Insert\\Delete\\Worksheet",
+        "option_c":"Home\\Delete\\Clear",
+        "option_d":"Home\\Delete\\Delete Sheet Columns",
+        "correct":"D"
+    },
+    {
+        "id":81,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Để thay đổi độ rộng của cột, ta thực hiện chức năng nào?",
+        "option_a":"Home\\Format\\Row Height",
+        "option_b":"Home\\Format\\Column Width",
+        "option_c":"Home\\Format\\AutoFit Row Height",
+        "option_d":"Home\\Format\\AutoFit Column Width",
+        "correct":"B"
+    },
+    {
+        "id":82,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Powerpoint, phần mở rộng của tên file là nhóm ký tự nào?",
+        "option_a":"ppts",
+        "option_b":"ppt",
+        "option_c":"pptx",
+        "option_d":"pptt",
+        "correct":"C"
+    },
+    {
+        "id":83,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Powerpoint, thanh công cụ truy cập nhanh có tên là?",
+        "option_a":"Quick Access Toolbar",
+        "option_b":"Quick Toolbar Access",
+        "option_c":"Access Quick Toolbar",
+        "option_d":"Toolbar Quick Access",
+        "correct":"A"
+    },
+    {
+        "id":84,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Powerpoint 2016, để hủy bỏ thao tác vừa thực hiện, ta ấn tổ hợp phím?",
+        "option_a":"Ctrl + Z",
+        "option_b":"Ctrl + F5",
+        "option_c":"Ctrl + A",
+        "option_d":"Ctrl + X",
+        "correct":"A"
+    },
+    {
+        "id":85,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Mỗi trang trình diễn trong Powerpoint được gọi là?",
+        "option_a":"Một Slide",
+        "option_b":"Một Page",
+        "option_c":"Một Sheet",
+        "option_d":"Một Cơ sở dữ liệu",
+        "correct":"A"
+    },
+    {
+        "id":86,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Powerpoint 2016, cách nào để thêm 1 Slide mới?",
+        "option_a":"Kích chuột phải vào Slide\/New Slide",
+        "option_b":"Kích chuột phải vào Slide\/Copy",
+        "option_c":"Kích chuột phải vào Slide\/Paste",
+        "option_d":"Kích chuột phải vào Slide\/Delete",
+        "correct":"A"
+    },
+    {
+        "id":87,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Powerpoint 2016, cách nào sau đây cho phép định dạng chung cho toàn bộ các Slide?",
+        "option_a":"View\/Notes Page",
+        "option_b":"View\/Normal",
+        "option_c":"View\/Slide Sorter",
+        "option_d":"View\/Slide Master",
+        "correct":"D"
+    },
+    {
+        "id":88,
+        "module":"Module 04: Sử dụng bảng tính cơ bản",
+        "question":"Trong Powerpoint 2016, để chuyển tập tin trình diễn sang dạng video?",
+        "option_a":"File \/ Save As\/ Save As Type\/ PowerPoint Presentation",
+        "option_b":"File \/ Save As\/ Save As Type\/ Windows Media Video",
+        "option_c":"File \/ Save As\/ Save As Type\/ PDF",
+        "option_d":"File \/ Save As\/ Save As Type\/ Word",
+        "correct":"B"
+    },
+    {
+        "id":89,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"Trong chương trình MS PowerPoint, chức năng Design\/Themes dùng để làm gì?",
+        "option_a":"Định dạng hiệu ứng lật trang",
+        "option_b":"Định dạng hiệu ứng cho các đối tượng trên slide",
+        "option_c":"Định dạng kiểu chữ cho slide",
+        "option_d":"Định dạng giao diện của slide",
+        "correct":"D"
+    },
+    {
+        "id":90,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"Trong Powerpoint 2016, cách nào để lựa chọn bố cục cho Slide?",
+        "option_a":"Format \/Slide Design",
+        "option_b":"Insert\/New Slide",
+        "option_c":"Home\/New Slide",
+        "option_d":"Home\/Layout",
+        "correct":"D"
+    },
+    {
+        "id":91,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"Internet có nghĩa là?",
+        "option_a":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các máy tính được liên kết với nhau",
+        "option_b":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính trong một cơ quan được liên kết với nhau",
+        "option_c":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính được liên kết với nhau",
+        "option_d":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính trong một quốc gia được liên kết với nhau",
+        "correct":"C"
+    },
+    {
+        "id":92,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"ISP là viết tắt của?",
+        "option_a":"Internet Service Provider",
+        "option_b":"Internet Server Provider",
+        "option_c":"Internet Super Provider",
+        "option_d":"Không có phương án đúng",
+        "correct":"A"
+    },
+    {
+        "id":93,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"WWW là viết tắt của?",
+        "option_a":"Word Wide Wed",
+        "option_b":"Word Wide Website",
+        "option_c":"Word Wild Web",
+        "option_d":"World Wide Web",
+        "correct":"D"
+    },
+    {
+        "id":94,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"HTTP là gì?",
+        "option_a":"Là giao thức truyền tải siêu văn bản",
+        "option_b":"Là ngôn ngữ để soạn thảo nội dung các trang Web",
+        "option_c":"Là tên của trang web",
+        "option_d":"Là địa chỉ của trang Web",
+        "correct":"A"
+    },
+    {
+        "id":95,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"Địa chỉ nào không phải là địa chỉ trang web?",
+        "option_a":"ninhbinh@yahoo.com",
+        "option_b":"www.laodong.com.vn",
+        "option_c":"ngoisao.net",
+        "option_d":"mail.yahoo.com",
+        "correct":"A"
+    },
+    {
+        "id":96,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"URL là cụm từ viết tắt của?",
+        "option_a":"URL (Universe Resource Internet)",
+        "option_b":"URL (Uniform Resource Location)",
+        "option_c":"URL (Uniform Resource Locator)",
+        "option_d":"Tất cả các đáp án đều đúng",
+        "correct":"C"
+    },
+    {
+        "id":97,
+        "module":"Module 05: Sử dụng trình chiếu cơ bản",
+        "question":"Internet Explorer là gì?",
+        "option_a":"Trình duyệt web",
+        "option_b":"1 chuẩn mạng cục bộ",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"A"
+    },
+    {
+        "id":98,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Mozilla Firefox là gì?",
+        "option_a":"Trình duyệt web",
+        "option_b":"1 chuẩn mạng cục bộ",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"A"
+    },
+    {
+        "id":99,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Google Chrome là gì?",
+        "option_a":"1 chuẩn mạng cục bộ",
+        "option_b":"Trình duyệt web",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"B"
+    },
+    {
+        "id":100,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Phần mềm nào sau đây không phải là trình duyệt Web?",
+        "option_a":"Internet Explorer",
+        "option_b":"FireBug",
+        "option_c":"Firefox",
+        "option_d":"Chromium",
+        "correct":"B"
+    },
+    {
+        "id":101,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Để xem một trang Web, ta cần gõ địa chỉ của trang đó vào đâu?",
+        "option_a":"Thanh công cụ chuẩn của trình duyệt",
+        "option_b":"Thanh địa chỉ của trình duyệt",
+        "option_c":"Thanh liên kết của trình duyệt",
+        "option_d":"Thanh trạng thái của trình duyệt",
+        "correct":"B"
+    },
+    {
+        "id":102,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Nút Refresh trên thanh công cụ của trình duyệt Web cho phép?",
+        "option_a":"Tải lại một trang web",
+        "option_b":"Đi đến một trang web khác",
+        "option_c":"Trở về trang chủ",
+        "option_d":"Thoát khỏi trình duyệt web",
+        "correct":"A"
+    },
+    {
+        "id":103,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Tường lửa là gì?",
+        "option_a":"Một hệ thống được xây dựng để đảm bảo an ninh cho công ty",
+        "option_b":"Tường lửa là một thiết bị phần cứng và\/hoặc một phần mềm hoạt động trong một môi trường máy tính nối mạng có mục đích chống lại sự xâm nhập trái phép từ Internet",
+        "option_c":"Một hệ thống báo cháy",
+        "option_d":"Một hệ thống bảo mật thông tin",
+        "correct":"B"
+    },
+    {
+        "id":104,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt để thêm một Tab?",
+        "option_a":"Ctrl+T",
+        "option_b":"Ctrl+N",
+        "option_c":"Alt+N",
+        "option_d":"Alt+H",
+        "correct":"A"
+    },
+    {
+        "id":105,
+        "module":"Module 06: Sử dụng Internet cơ bản",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt để đóng một Tab?",
+        "option_a":"Ctrl+Q",
+        "option_b":"Ctrl+W",
+        "option_c":"Ctrl+C",
+        "option_d":"Ctrl+F4",
+        "correct":"B"
+    },
+    {
+        "id":106,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Trong soạn thảo Microsoft Office Word, công dụng của tổ hợp phím Ctrl + O là",
+        "option_a":"Mở một file đã lưu trên ổ đĩa máy tính",
+        "option_b":"Mở một file mới",
+        "option_c":"Đóng file đang mở",
+        "option_d":"Lưu file",
+        "correct":"A"
+    },
+    {
+        "id":107,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để mở một văn bản có sẵn ta dùng tổ hợp phím nào?",
+        "option_a":"Ctrl+O",
+        "option_b":"Ctrl+Shift+O",
+        "option_c":"Shift +O",
+        "option_d":"Alt+O",
+        "correct":"A"
+    },
+    {
+        "id":108,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để chèn phần bảng dữ liệu trong Excel sang file Word ta thực hiện như sau:",
+        "option_a":"Vào Home\/ Paste\/Paste Special\/ Microsoft Excel 2003 Worksheet Object \/OK",
+        "option_b":"Copy phần dữ liệu định chèn. Vào Home\/ Paste\/Microsoft Excel 2003 Worksheet Object \/OK",
+        "option_c":"Copy phần dữ liệu định chèn, Vào Home\/ Paste\/ Paste Special\/ Microsoft Excel 2003 Worksheet Object \/OK",
+        "option_d":"Copy phần dữ liệu định chèn. Vào Home\/ Paste Special\/ Microsoft Excel 2003 Worksheet Object",
+        "correct":"C"
+    },
+    {
+        "id":109,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"© được gọi là:",
+        "option_a":"Ký hiệu đặc biệt",
+        "option_b":"Chữ viết",
+        "option_c":"Kí tự thông thường",
+        "option_d":"Hình ảnh",
+        "correct":"A"
+    },
+    {
+        "id":110,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để chèn được dấu ≥ vào văn bản , ta thực hiện:",
+        "option_a":"Insert\/ Symbol",
+        "option_b":"Dấu ≥ được tích hợp sẵn trên bàn phím, chỉ cần gõ",
+        "option_c":"Vào thanh Quick Access Toolbar\/ Spelling and Grammar",
+        "option_d":"Gõ dấu > và gõ dấu =",
+        "correct":"A"
+    },
+    {
+        "id":111,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để chèn được ký hiệu ® ta thực hiện các bước:",
+        "option_a":"Insert\/ Symbol\/ More Symbols\/ Wing dings",
+        "option_b":"Insert\/ Symbol\/ More Symbols\/ Webdings",
+        "option_c":"Insert\/ Symbol\/ More Symbols\/ Symbol\/ Special Character",
+        "option_d":"Insert\/ Symbol\/ More Symbols\/ Special Character",
+        "correct":"D"
+    },
+    {
+        "id":112,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Tổ hợp phím Ctrl + S có chức năng:",
+        "option_a":"Lưu tài liệu",
+        "option_b":"Mở tài liệu",
+        "option_c":"Đóng tài liệu",
+        "option_d":"Tạo tài liệu mới",
+        "correct":"A"
+    },
+    {
+        "id":113,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để lưu văn bản hiện thời thành một tên mới ta thực hiện:",
+        "option_a":"File\/Save",
+        "option_b":"Home\/Save As",
+        "option_c":"Home\/Save",
+        "option_d":"File\/Save As",
+        "correct":"D"
+    },
+    {
+        "id":114,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Khi lưu văn bản, ta có thể lưu với các phần mở rộng là?",
+        "option_a":".doc,.xlsx,.pdf",
+        "option_b":".docx,.xlsx,.pdf",
+        "option_c":".docx,.xls,.pdf",
+        "option_d":".doc, .docx,.pdf",
+        "correct":"D"
+    },
+    {
+        "id":115,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để sắp xếp tất cả các cửa sổ văn bản đang mở trên màn hình máy tính chúng ta thực hiện:",
+        "option_a":"Home\/ Window\/ Arrange All",
+        "option_b":"View\/ Window\/ Arrange All",
+        "option_c":"File\/ Window\/ Arrange All",
+        "option_d":"Review\/ Window\/ Arrange All",
+        "correct":"B"
+    },
+    {
+        "id":116,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để sắp xếp các cửa sổ văn b ản trên màn hình Word theo thứ tự nào đó ta thực hiện như thế nào?",
+        "option_a":"Vào Home\/ Trong nhóm Window chọn kiểu sắp xếp thích hợp",
+        "option_b":"Vào Review\/ Trong nhóm Window chọn kiểu sắp xếp thích hợp",
+        "option_c":"Vào View\/ Trong nhóm Window chọn kiểu sắp xếp thích hợp",
+        "option_d":"Vào Insert\/ Trong nhóm Window chọn kiểu sắp xếp thích hợp",
+        "correct":"C"
+    },
+    {
+        "id":117,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để xóa một văn bản ta thực hiện?",
+        "option_a":"Chọn văn bản cần xóa\/ Click chuột\/ Chọn Delete",
+        "option_b":"Chọn văn bản cần xóa\/ Click phải chuột\/ Chọn Delete",
+        "option_c":"Click phải chuột\/ Chọn Delete",
+        "option_d":"Chọn văn bản cần xóa\/  Click phải chuột\/ Chọn Remove",
+        "correct":"B"
+    },
+    {
+        "id":118,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để chọn (bôi đen) toàn bộ văn bản ta thực hiện:",
+        "option_a":"Click chuột trái 3 lần liên tiếp tại lề phải văn bản",
+        "option_b":"Click chuột phải 3 lần liên tiếp tại lề trên văn bản",
+        "option_c":"Click chuột trái 3 lần liên tiếp tại lề dưới văn bản",
+        "option_d":"Đưa con trỏ vào văn bản đang mở sau đó nhấn Ctrl +A",
+        "correct":"D"
+    },
+    {
+        "id":119,
+        "module":"MODULE  03: XỬ LÝ VĂN  BẢN  CƠ BẢN",
+        "question":"Để di chuyển đến một trang bất kì trong văn bản ta làm thế nào?",
+        "option_a":"Bấm tổ hợp phím Ctrl+F, trong mục Enter Page Number nhập số trang cần đến.",
+        "option_b":"Bấm tổ hợp phím Ctrl+H, trong mục Enter Page Number nhập số trang cần đến.",
+        "option_c":"Bấm tổ hợp phím Ctrl+G, trong mục Enter Page Number nhập số trang cần đến.",
+        "option_d":"Bấm tổ hợp phím Ctrl+D, trong mục Enter Page Number nhập số trang cần đến.",
+        "correct":"C"
+    },
+    {
+        "id":120,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Muốn tạo được dấu % từ bàn phím ta làm thế nào",
+        "option_a":"Giữ phím Ctrl và ấn số 5",
+        "option_b":"Ấn số 5",
+        "option_c":"Giữ phím Alt và ấn số 5",
+        "option_d":"Giữ phím Shift và ấn số 5",
+        "correct":"D"
+    },
+    {
+        "id":121,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Microsoft Excel là công cụ dùng để:",
+        "option_a":"Soạn thảo",
+        "option_b":"Trình chiếu",
+        "option_c":"Tính toán",
+        "option_d":"Gửi thư",
+        "correct":"C"
+    },
+    {
+        "id":122,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Phần mở rộng mặc định của tệp được tạo bằng Microsoft Ex cel 2016 là gì?",
+        "option_a":"XLXS",
+        "option_b":"XSLX",
+        "option_c":"XXLS",
+        "option_d":"XLSX",
+        "correct":"D"
+    },
+    {
+        "id":123,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong MS Excel, muốn nhờ chương trình giúp đỡ về một vấn đề gì đó, ta nhấn phím:",
+        "option_a":"F1",
+        "option_b":"F2",
+        "option_c":"F3",
+        "option_d":"F4",
+        "correct":"A"
+    },
+    {
+        "id":124,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Với cùng một nội dung, kích thước của tệp có phần mở rộng xls so với tệp có phần mở rộng xlsx như thế nào?",
+        "option_a":"Kích thước 2 tệp bằng nhau",
+        "option_b":"Tệp có phần mở rộng xls có kích thước nhỏ hơn so với tệp có phần mở rộng xlsx",
+        "option_c":"Tệp có phần mở rộng xls có kích thước lớn hơn so với tệp có phần mở rộng xlsx",
+        "option_d":"Tệp có phần mở rộng xls có kích thước lớn hơ n so với tệp có phần mở rộng xlsx 10 lần",
+        "correct":"C"
+    },
+    {
+        "id":125,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Một trong những thuật ngữ sau không phải dùng để chỉ một thành phần của Excel?",
+        "option_a":"WorkBook",
+        "option_b":"WorkSheet",
+        "option_c":"Workdocument",
+        "option_d":"WorkSpace",
+        "correct":"C"
+    },
+    {
+        "id":126,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, cách nào để mở một tệp Excel đã có trên máy tính?",
+        "option_a":"Ctrl + M",
+        "option_b":"Ctrl+N",
+        "option_c":"Ctrl + W",
+        "option_d":"Ctrl+O",
+        "correct":"D"
+    },
+    {
+        "id":127,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, cách nào để mở một tệp Excel đã có trên máy tính?",
+        "option_a":"Ctrl + M",
+        "option_b":"Ctrl+N",
+        "option_c":"Ctrl + W",
+        "option_d":"Ctrl+O",
+        "correct":"D"
+    },
+    {
+        "id":128,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, cách nào để đóng một tệp?",
+        "option_a":"Ctrl+F4",
+        "option_b":"Alt+F4",
+        "option_c":"Shift+F4",
+        "option_d":"F4",
+        "correct":"A"
+    },
+    {
+        "id":129,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, cách nào để tạo mới một tệp?",
+        "option_a":"Ctrl + O",
+        "option_b":"Ctrl+N",
+        "option_c":"Ctrl + M",
+        "option_d":"Ctrl + W",
+        "correct":"B"
+    },
+    {
+        "id":130,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, cách nào để lưu tệp hiện thời với tên mới?",
+        "option_a":"F11",
+        "option_b":"F10",
+        "option_c":"F9",
+        "option_d":"F12",
+        "correct":"D"
+    },
+    {
+        "id":131,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, phương án nào dưới đây không phải là địa chỉ ô?",
+        "option_a":"$12$A",
+        "option_b":"$A$12",
+        "option_c":"A$12",
+        "option_d":"A12",
+        "correct":"A"
+    },
+    {
+        "id":132,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, phương án nào dưới đây là địa chỉ tuyệt đối?",
+        "option_a":"$A$12",
+        "option_b":"$12$A",
+        "option_c":"A$12$",
+        "option_d":"A12",
+        "correct":"D"
+    },
+    {
+        "id":133,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Microsoft Excel, phương án nào dưới đây là địa chỉ hỗn hợp?",
+        "option_a":"$A12",
+        "option_b":"$A$12",
+        "option_c":"A12$",
+        "option_d":"A12",
+        "correct":"A"
+    },
+    {
+        "id":134,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong cô ng thức của Microsoft Excel, sử dụng phím nào để chuyển đổi địa chỉ tuyệt đối sang địa chỉ tương đối hoặc ngược lại cho ô hoặc vùng đã chọn?",
+        "option_a":"F3",
+        "option_b":"F4",
+        "option_c":"F2",
+        "option_d":"F5",
+        "correct":"B"
+    },
+    {
+        "id":135,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong bảng tính Excel, vùng là tập hợp nhiều ô kế cận tạo thành hình chữ nhật, địa chỉ  vùng được thể hiện như câu nào sau đây là đúng?",
+        "option_a":"B1...H15",
+        "option_b":"B1-H15",
+        "option_c":"B1..H15",
+        "option_d":"B1:H15",
+        "correct":"D"
+    },
+    {
+        "id":136,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong MS Excel, giả sử tại ô B5 có công thức = A1+$B$2+C$3. Sau khi sao chép công thức đó từ ô B5 đến ô D8 sẽ có công thức:",
+        "option_a":"= C1 + $B$2 + E$3",
+        "option_b":"= A4 + $ B$2 + C$3",
+        "option_c":"Báo lỗi",
+        "option_d":"= C4 + $B$2 + E$3",
+        "correct":"D"
+    },
+    {
+        "id":137,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Theo mặc định ký tự dạng ngày tháng sẽ được:",
+        "option_a":"Canh đều hai bên",
+        "option_b":"Canh bên phải ô",
+        "option_c":"Canh bên trái ô",
+        "option_d":"Canh giữa ô",
+        "correct":"B"
+    },
+    {
+        "id":138,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Đáp án nào sau đây đúng? Khi nhập dữ liệu vào bảng tính Excel thì:",
+        "option_a":"Dữ liệu kiểu số sẽ m ặc định căn lề trái",
+        "option_b":"Dữ liệu kiểu ký tự sẽ mặc định căn lề trái",
+        "option_c":"Dữ liệu kiểu thời gian sẽ mặc định căn lề trái",
+        "option_d":"Dữ liệu kiểu ngày tháng sẽ mặc định căn lề trái",
+        "correct":"B"
+    },
+    {
+        "id":139,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Các kiểu dữ liệu thông dụng của Excel là :",
+        "option_a":"Kiểu chuỗi, kiểu số, kiểu lôgic, kiểu ngày t háng, kiểu công thức",
+        "option_b":"Kiểu số, kiểu lôgic, kiểu ngày tháng",
+        "option_c":"Kiểu chuỗi, kiểu văn bản, kiểu ngày tháng",
+        "option_d":"Kiểu công thức, kiểu hàm, kiểu số, kiểu ngày tháng",
+        "correct":"A"
+    },
+    {
+        "id":140,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để chọn toàn bộ các ô trên bảng tính bằng tổ hợp phím ta nhấn:",
+        "option_a":"Ctrl + Alt",
+        "option_b":"Ctrl + A",
+        "option_c":"Ctrl + Alt +Space",
+        "option_d":"Ctrl + Alt + Shift",
+        "correct":"B"
+    },
+    {
+        "id":141,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để chọn nhiều vùng trong MS Excel, khi chọn ta nhấn phím:",
+        "option_a":"Shift",
+        "option_b":"Esc",
+        "option_c":"Ctrl",
+        "option_d":"Alt",
+        "correct":"C"
+    },
+    {
+        "id":142,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Tổ hợp phím Shift + một trong bốn phím mũi tên thực hiện chức năng gì?",
+        "option_a":"Bôi đen (Chọn)",
+        "option_b":"Di chuyển con trỏ",
+        "option_c":"Không thực hiện chức năng nào",
+        "option_d":"Xóa dữ liệu",
+        "correct":"A"
+    },
+    {
+        "id":143,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để hủy kết quả vừa làm ta chọn:",
+        "option_a":"Redo",
+        "option_b":"Back",
+        "option_c":"Delete",
+        "option_d":"Undo",
+        "correct":"D"
+    },
+    {
+        "id":144,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong bảng tính Excel, để sửa dữ liệu trong một ô tính mà không cần nhập lại, ta thực hiện:",
+        "option_a":"F2",
+        "option_b":"F3",
+        "option_c":"F4",
+        "option_d":"F5",
+        "correct":"A"
+    },
+    {
+        "id":145,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để nhanh  chóng xem các thí sinh xếp loại \"xuất sắc\", ta bôi đen toàn bộ vùng có chứa dữ liệu cần xem rồi sử dụng công cụ gì trong số các công cụ sau",
+        "option_a":"Vào menu Data, chọn Filter - Autofilter",
+        "option_b":"Vào menu View, chọn mức \"xuất sắc\"",
+        "option_c":"Vào menu Data, chọn Validati on",
+        "option_d":"Vào menu Tools, chọn Quick view, chọn mức \"xuất sắc\"",
+        "correct":"A"
+    },
+    {
+        "id":146,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong Excel muốn sắp xếp dữ liệu sau khi quét khối phần dữ liệu muốn sắp xếp ta chọn?",
+        "option_a":"Data --> Filter…",
+        "option_b":"Data --> Index…",
+        "option_c":"Data --> Sort…",
+        "option_d":"Data --> Form…",
+        "correct":"C"
+    },
+    {
+        "id":147,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Tại D2 có công thức \"=B1+C1\", kh i sao chép sang ô E2 thì E2 có công thức là:",
+        "option_a":"=C1+D1",
+        "option_b":"=B1+D1",
+        "option_c":"=C1+D2",
+        "option_d":"=C2+D2",
+        "correct":"A"
+    },
+    {
+        "id":148,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong bảng tính Excel, tại ô A2 có sẵn dãy kí tự \"1Angiang2\". Nếu sử dụng sao chép công thức để điền dữ liệu đến các cột B2, C2, D2, E2; thì kết quả nhận được tại ô E 2 là:",
+        "option_a":"5Angiang6",
+        "option_b":"5Angiang2",
+        "option_c":"1Angiang6",
+        "option_d":"1Angiang2",
+        "correct":"C"
+    },
+    {
+        "id":149,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong bảng tính Excel, tại ô A2 có sẵn giá trị dãy kí tự \"1 Angiang 2\". Nếu sử dụng sao chép công thức để điền dữ liệu đến các ô B2, C2, D2, E2 ; thì kết quả nhận được tại ô E2 là:",
+        "option_a":"1 Angiang  2",
+        "option_b":"1 Angiang 6",
+        "option_c":"2 Angiang 2",
+        "option_d":"5 Angiang 2",
+        "correct":"D"
+    },
+    {
+        "id":150,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để di chuyển vùng dữ liệu từ nơi này sang nơi khác ta nhấn:",
+        "option_a":"Ctrl + p",
+        "option_b":"Ctrl + v",
+        "option_c":"Ctrl + x",
+        "option_d":"Ctrl + c",
+        "correct":"C"
+    },
+    {
+        "id":151,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để xoá một cột, bôi đen cột và chọn?",
+        "option_a":"Insert \\Delete \\Delete Sheet Rows",
+        "option_b":"Insert \\Delete \\Worksheet",
+        "option_c":"Home \\Delete \\Clear",
+        "option_d":"Home \\Delete \\Delete Sheet Columns",
+        "correct":"D"
+    },
+    {
+        "id":152,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để xoá một hàng, bôi đen hàng và chọn?",
+        "option_a":"Home \\Delete \\Delete Sheet Rows",
+        "option_b":"Home \\Delete \\Delete Sheet Columns",
+        "option_c":"Home \\Delete \\Clear",
+        "option_d":"Insert \\Delete \\Worksheet",
+        "correct":"A"
+    },
+    {
+        "id":153,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Giả sử đã bôi đen  một hàng trong Excel. Lệnh nào trong số các lệnh sau cho phép chèn thêm một hàng vào vị trí phía trên hàng đang chọn.",
+        "option_a":"Vào thực đơn Insert, chọn Cells",
+        "option_b":"Vào thực đơn Insert, chọn Rows.",
+        "option_c":"Vào thực đơn Insert, chọn Columns",
+        "option_d":"Vào thực đơn Insert, c họn Object",
+        "correct":"B"
+    },
+    {
+        "id":154,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để thay đổi độ rộng của cột, ta thực hiện chức năng nào?",
+        "option_a":"Home \\Format \\Row Height",
+        "option_b":"Home \\Format \\Column Width",
+        "option_c":"Home \\Format \\AutoFit Row Height",
+        "option_d":"Home \\Format \\AutoFit Column Width",
+        "correct":"B"
+    },
+    {
+        "id":155,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong bảng tính MS Excel 2016, để giữ cố định hàng hoặc cộ t trong cửa sổ soạn thảo, ta đánh dấu hàng hoặc cột, chọn:",
+        "option_a":"Thẻ Review – Freeze Panes",
+        "option_b":"Thẻ View – Freeze Panes",
+        "option_c":"Thẻ Page Layout – Freeze Panes",
+        "option_d":"Thẻ Home – Freeze Panes",
+        "correct":"B"
+    },
+    {
+        "id":156,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Trong MS Excel 2016, để ẩn cột ta có thể thực hiện:",
+        "option_a":"ViewformatHide & Un hideHide columns",
+        "option_b":"FomulasformatHide & UnhideHide columns",
+        "option_c":"DataformatHide & UnhideHide columns",
+        "option_d":"Chọn cột cần ẩn\/ Kích chuột phải chọn Hide",
+        "correct":"D"
+    },
+    {
+        "id":157,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để giữ cố định hàng được lặp lại qua các trang, ta chọn hàng bên dưới hàng đó và thực hiện: :",
+        "option_a":"View \\Freez e Panes",
+        "option_b":"Review \\Freeze Panes",
+        "option_c":"Data\\Freeze Panes",
+        "option_d":"Page Layout \\Freeze Panes",
+        "correct":"A"
+    },
+    {
+        "id":158,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Để đổi tên một sheet ta chọn:",
+        "option_a":"Chuột trái lên tên sheet \\Delete",
+        "option_b":"Chuột phải lên sheet \\Rename",
+        "option_c":"Chuột phải lên sheet \\Insert",
+        "option_d":"Cả ba cách đều sai",
+        "correct":"B"
+    },
+    {
+        "id":159,
+        "module":"MODULE  04: SỬ DỤNG  BẢNG  TÍNH  CƠ BẢN",
+        "question":"Sheet được chèn t hêm vào bảng tính sẽ nằm ở vị trí:",
+        "option_a":"Trước sheet đang mở",
+        "option_b":"Sau sheet đang mở",
+        "option_c":"Trước tất cả các sheet",
+        "option_d":"Phía sau tất cả các sheet",
+        "correct":"D"
+    },
+    {
+        "id":160,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Thao tác để di chuyển đến một sheet khác trong cùng một tập tin?",
+        "option_a":"Nhấn phím F5 và số thứ tự của các sheet",
+        "option_b":"Nhấn  phím F2 và số thứ tự của các sheet",
+        "option_c":"Nhấn phím F3 và số thứ tự của các sheet",
+        "option_d":"Nhấn chuột lên tên sheet cần di chuyển đến hoặc nhấn tổ hợp phím Ctrl + PgUp hoặc Ctrl + PgUp",
+        "correct":"D"
+    },
+    {
+        "id":161,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Để một bài thuyết trình đạt hiệu quả cao, chúng ta cần quan tâm tới vấn đề nào đầu tiên ?",
+        "option_a":"Đối tượng nghe bài thuyết trình",
+        "option_b":"Phương pháp thuyết trình",
+        "option_c":"Hình thức thuyết trình",
+        "option_d":"Nắm vững nội dung cần thuyết trình",
+        "correct":"D"
+    },
+    {
+        "id":162,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Cấu trúc chung của một bài thuyết trình gồm có bao nhiêu phần ?",
+        "option_a":"1",
+        "option_b":"2",
+        "option_c":"3",
+        "option_d":"4",
+        "correct":"C"
+    },
+    {
+        "id":163,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint, phần mở rộng của tên file là nhóm ký tự nào?  0. #NAME!",
+        "option_a":"ppts",
+        "option_b":"ppt",
+        "option_c":"pptx",
+        "option_d":"pptt",
+        "correct":"C"
+    },
+    {
+        "id":164,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong  Powerpoint 2016, thoát khỏi chương trình bằng cách?",
+        "option_a":"Nhấn nút Close",
+        "option_b":"Nhấn tổ hợp phím Alt + F4",
+        "option_c":"Tất cả đểu đúng",
+        "option_d":"Vào File\/ Close",
+        "correct":"C"
+    },
+    {
+        "id":165,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Để mở chương trình Powerpoint 2016, ta làm thế nào?",
+        "option_a":"Kích đúp chuột trái vào biểu tượng Powerpoint 2016 trên màn hình desktop",
+        "option_b":"Kích chuột phải vào biểu tượng Powerpoint 20106 trên màn hình desktop\/Open",
+        "option_c":"Tất cả các đáp án đều đúng",
+        "option_d":"Start\/All Programs\/Microsoft Office\/Powerpoint 2010",
+        "correct":"C"
+    },
+    {
+        "id":166,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong  Powerpoint, thanh công cụ truy cập nhanh có tên là?",
+        "option_a":"Quick Access Toolbar",
+        "option_b":"Quick Toolbar Access",
+        "option_c":"Access Quick Toolbar",
+        "option_d":"Toolbar Quick Access",
+        "correct":"A"
+    },
+    {
+        "id":167,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong PowerPoint 2016 , thao tác nào sau đây để tùy chọn phần ẩn\/hiện của các thanh công cụ ?",
+        "option_a":"Vào File\/Options\/Customize Ribbon",
+        "option_b":"Vào File\/Options\/Advanced",
+        "option_c":"Vào File\/Options\/General",
+        "option_d":"Vào File\/Options\/Proofing",
+        "correct":"A"
+    },
+    {
+        "id":168,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Để truy nhập hệ thống trợ giúp trên PowerPoint sử dụng phím hay tổ hợp phím nào ?",
+        "option_a":"ESC",
+        "option_b":"C t r l  +  H",
+        "option_c":"F1",
+        "option_d":"Alt + Tab",
+        "correct":"C"
+    },
+    {
+        "id":169,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, cách nào để mở 1 bản trình bày (Presentation) có sẵn trong máy tính?",
+        "option_a":"File\/Close",
+        "option_b":"File\/Edit",
+        "option_c":"File\/Open",
+        "option_d":"File\/Save",
+        "correct":"C"
+    },
+    {
+        "id":170,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, thao tác File\/Op en dùng để làm gì?",
+        "option_a":"Mở 1 bản trình bày (Presentation) có sẵn trong máy tính",
+        "option_b":"Đóng 1 bản trình bày (Presentation) có sẵn trong máy tính",
+        "option_c":"Lưu 1 bản trình bày (Presentation) có sẵn trong máy tính",
+        "option_d":"Xóa 1 bản trình bày (Presentation) có sẵn trong má y tính",
+        "correct":"A"
+    },
+    {
+        "id":171,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, để thoát file hiện hành, ta làm thế nào?",
+        "option_a":"File\/Save",
+        "option_b":"File\/Open",
+        "option_c":"File\/close",
+        "option_d":"File\/Edit",
+        "correct":"C"
+    },
+    {
+        "id":172,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong  Powerpoint 2016, thao tác File\/Close dùng để làm gì?",
+        "option_a":"Lưu file hiện tại",
+        "option_b":"Xóa file hiện tại",
+        "option_c":"Sao chép file hiện  tại",
+        "option_d":"Đóng file hiện tại",
+        "correct":"D"
+    },
+    {
+        "id":173,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong  Trong Powerpoint 2016, có 3 file đang mở, thao tác chọn File\/Close dùng để làm gì?",
+        "option_a":"Đóng file hiện tại",
+        "option_b":"Thoát khỏi Powerpoint",
+        "option_c":"Đóng Slide hiện tại",
+        "option_d":"Tắt máy tính",
+        "correct":"A"
+    },
+    {
+        "id":174,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, cách nào để tạo một bản trình bày (Presentation) mới?",
+        "option_a":"Insert\/New Slide\/Create",
+        "option_b":"File\/New Presentation\/Create",
+        "option_c":"File\/New\/Blank Presentation\/Create",
+        "option_d":"Insert\/New\/Blank Presentation\/Create",
+        "correct":"C"
+    },
+    {
+        "id":175,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, thao tác nào sau đây để tạo mới 1 tập tin trình diễn theo mẫu giao diện (Themes) của chương trình?",
+        "option_a":"Vào File \/ New \/ Themes \/ Chọn mẫu \/ Create",
+        "option_b":"Vào Home \/ New \/ Themes \/ Chọn mẫu \/ OK",
+        "option_c":"Vào Home \/ New \/ Themes \/ Chọn mẫu \/ Create",
+        "option_d":"Vào File \/ New \/ Themes \/ Chọn mẫu \/ OK",
+        "correct":"A"
+    },
+    {
+        "id":176,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, thao tác nào  sau đây để tạo mới 1 tập tin trình diễn theo mẫu (Sample templates) của chương trình?",
+        "option_a":"Vào Home \/ New \/ Sample templates \/ Chọn mẫu \/ Create",
+        "option_b":"Vào File \/ New \/ Sample templates \/ Chọn mẫu \/ Create",
+        "option_c":"Vào Design \/ New \/ Sample templates \/ Chọn mẫu \/ Create",
+        "option_d":"Vào Insert \/ New \/ Sample templates \/ Chọn mẫu \/ Create",
+        "correct":"B"
+    },
+    {
+        "id":177,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, để chuyển sang chế độ hiển thị đọc ta thực hiện?",
+        "option_a":"Vào View, chọn Reading Mode",
+        "option_b":"Vào Review, chọn Reading Mode",
+        "option_c":"Vào Review, chọn Reading View",
+        "option_d":"Vào Vi ew, chọn Reading View",
+        "correct":"D"
+    },
+    {
+        "id":178,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, chế độ hiển thị nào cho phép t hực hiện sắp xếp lại các Slide?",
+        "option_a":"View\/ Normal",
+        "option_b":"View\/ Page Layout",
+        "option_c":"View\/ Slide Sorter",
+        "option_d":"View\/ Reading View",
+        "correct":"C"
+    },
+    {
+        "id":179,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint, tổ hợp phím Shift + F9 được sử dụng để?",
+        "option_a":"Chuyển  sang chế độ đọc",
+        "option_b":"Bật, hoặc Tắt chế độ khung lưới khi soạn thảo",
+        "option_c":"Tắt chế độ khung lưới khi soạn thảo",
+        "option_d":"Bật chế độ khung lưới khi soạn thảo",
+        "correct":"B"
+    },
+    {
+        "id":180,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong  Powerpoint, tổ hợp phím Shift + Alt + F9 được sử dụng để?",
+        "option_a":"Bật thanh thước kẻ",
+        "option_b":"Bật hoặc Tắt thanh thước kẻ",
+        "option_c":"Tắt thanh thước kẻ",
+        "option_d":"Tất cả đều sai",
+        "correct":"B"
+    },
+    {
+        "id":181,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong PowerPoint 2016, thao tác nào sau đây dùng để bật, tắt khung lưới Gridlines?",
+        "option_a":"Nhấn tổ hợp phím Shift + F9",
+        "option_b":"Vào View chọn Gridlines",
+        "option_c":"Tất cả đều đúng",
+        "option_d":"Vào Home \/ Arrange \/ Align \/ View Gridlines",
+        "correct":"C"
+    },
+    {
+        "id":182,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2010, để lưu file, ta làm thế nào?",
+        "option_a":"File\/Open",
+        "option_b":"File\/Close",
+        "option_c":"File\/Edit",
+        "option_d":"File\/Save",
+        "correct":"D"
+    },
+    {
+        "id":183,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, thao tác File\/Save dùng để làm gì?",
+        "option_a":"Xóa file hiện tại",
+        "option_b":"Sao chép file hiện tại",
+        "option_c":"Đóng file hiện tại",
+        "option_d":"Lưu file hiện tại",
+        "correct":"D"
+    },
+    {
+        "id":184,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2010, thao tác Ctrl + S dùng để làm gì?",
+        "option_a":"Xóa file hiện tại",
+        "option_b":"Sao chép file hiện tại",
+        "option_c":"Đóng file hiện tại",
+        "option_d":"Lưu file hiện tại",
+        "correct":"D"
+    },
+    {
+        "id":185,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, để chuyển tập tin trình diễn sang dạng video?",
+        "option_a":"File \/ Save As\/ Save As Type\/ PowerPoint Presentation",
+        "option_b":"File \/ Save As\/ Save As Type\/ Windows Media Video",
+        "option_c":"File \/ Save As\/ Save As Type\/ PDF",
+        "option_d":"File \/ Save As\/ Save As Type\/ Word",
+        "correct":"B"
+    },
+    {
+        "id":186,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, để đặt mật khẩu cho file hiện tại?",
+        "option_a":"Vào File\/Save \/ Protect Presentation \/ Encrypt with Password.",
+        "option_b":"Vào File\/ Info\/ Protect Presentation\/ Encrypt with Password.",
+        "option_c":"Vào Home \/ Info \/ Protect Presentation \/ Encrypt with Password.",
+        "option_d":"Vào Home \/ Save \/ Protect Presentation \/ Encrypt with Password.",
+        "correct":"B"
+    },
+    {
+        "id":187,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, chọn phát biểu đúng?",
+        "option_a":"Không cho phép lưu các Slide thành tập tin định dạng hình ảnh JPG",
+        "option_b":"Tổ hợp CTRL + O dùng để tạo thêm 1 trang Slide mới",
+        "option_c":"Lệnh Rehearse Timings dùng để xóa 1 Slide",
+        "option_d":"Cho phép lưu các Slide thành tập tin định dạng văn bản điện tử PDF",
+        "correct":"D"
+    },
+    {
+        "id":188,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong PowerPoint 2016, thao tác nào sau đây để thiết lập thư mục lưu trữ mặc định?",
+        "option_a":"File \/ Option \/ Save \/ Default file location.",
+        "option_b":"File \/ Save \/ Default file location",
+        "option_c":"Option \/ Save \/ Default file location",
+        "option_d":"File \/ Save \/ Option \/ Default file location.",
+        "correct":"A"
+    },
+    {
+        "id":189,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, thao tác File \/ Option \/ Save \/ Default file location dùng để làm gì?",
+        "option_a":"Thiết lập các thông số cho các trang in",
+        "option_b":"Thiết lập thông số cho toàn bộ Slide",
+        "option_c":"Thiết lập thư mục lưu trữ mặc định",
+        "option_d":"Thiết lập theme cho toàn bộ Slide",
+        "correct":"C"
+    },
+    {
+        "id":190,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong PowerPoint 2016, thao tác nào sau đây để mở một bài thuyết trình đồng thời trên hai của sổ ?",
+        "option_a":"Vào Review\/New Windows",
+        "option_b":"Vào Home\/New Windows",
+        "option_c":"Vào View\/New Windows",
+        "option_d":"Vào Data\/New Windows",
+        "correct":"C"
+    },
+    {
+        "id":191,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Mỗi trang trình diễn trong Powerpoint được gọi là?",
+        "option_a":"Một Slide",
+        "option_b":"Một Page",
+        "option_c":"Một Sheet",
+        "option_d":"Một Cơ sở dữ liệu",
+        "correct":"A"
+    },
+    {
+        "id":192,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, để hủy bỏ thao tác vừa thực hiện, ta ấn tổ hợp phím?",
+        "option_a":"Ctrl + Z",
+        "option_b":"Ctrl + F5",
+        "option_c":"Ctrl + A",
+        "option_d":"Ctrl + X",
+        "correct":"A"
+    },
+    {
+        "id":193,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong chương trình MS PowerPoint, chức năng Design\/Themes dùng để làm gì?",
+        "option_a":"Định dạng hiệu ứng lật trang",
+        "option_b":"Định đạng hiệu ứng cho các đối tượng trên slide",
+        "option_c":"Định dạng kiểu chữ cho slide",
+        "option_d":"Định dạng giao diện của slide",
+        "correct":"D"
+    },
+    {
+        "id":194,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, cách nào để lựa chọn bố cục cho Slide?",
+        "option_a":"Format \/Slide Design",
+        "option_b":"Insert\/New Slide",
+        "option_c":"Home\/New Slide",
+        "option_d":"Home\/Layout",
+        "correct":"D"
+    },
+    {
+        "id":195,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, cách nào để thêm 1 Slide mới?",
+        "option_a":"Kích chuột phải vào Slide\/New Slide",
+        "option_b":"Kích chuột phải vào Slide\/Copy",
+        "option_c":"Kích chuột phải vào Slide\/Copy",
+        "option_d":"Kích chuột phải vào Slide\/Delete",
+        "correct":"A"
+    },
+    {
+        "id":196,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, cách nào sau đây cho phép định dạng chung cho toàn bộ các Slide?",
+        "option_a":"View\/Notes Page",
+        "option_b":"View\/Normal",
+        "option_c":"View\/Slide Sorter",
+        "option_d":"View\/Slide Master",
+        "correct":"D"
+    },
+    {
+        "id":197,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong Powerpoint 2016, cách nào để lựa chọn bố cục cho Slide đã chọn gồm tiêu đề và nội dung?  :",
+        "option_a":"Home\/Layout\/Title and Content",
+        "option_b":"Home\/Layout\/Title Slide",
+        "option_c":"Home\/Slide Design",
+        "option_d":"Home\/Layout\/Title Slide",
+        "correct":"A"
+    },
+    {
+        "id":198,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong PowerPoint 2016, mẫu bố cục (Layout) Two Content có bao nhiêu placeholder?",
+        "option_a":"3",
+        "option_b":"2",
+        "option_c":"4",
+        "option_d":"5",
+        "correct":"A"
+    },
+    {
+        "id":199,
+        "module":"MODULE  05: SỬ DỤNG  TRÌNH  CHIẾU  CƠ BẢN",
+        "question":"Trong PowerPoint 2016, mẫu bố c ục (Layout) Comparison có bao nhiêu placeholder?",
+        "option_a":"2",
+        "option_b":"5",
+        "option_c":"3",
+        "option_d":"4",
+        "correct":"B"
+    },
+    {
+        "id":200,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trong PowerPoint 2016, mẫu bố cục (Layout) Picture with Caption có bao nhiêu placeholder cho phép nhập văn bản?  :\\",
+        "option_a":"1",
+        "option_b":"2",
+        "option_c":"3",
+        "option_d":"4",
+        "correct":"B"
+    },
+    {
+        "id":201,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Internet có nghĩa là?",
+        "option_a":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các máy tính được liên kết với nhau",
+        "option_b":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính trong một cơ quan được liên kết với nhau",
+        "option_c":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính được liên kết với nhau",
+        "option_d":"Hệ thống thông tin toàn cầu có thể được truy nhập công cộng gồm các mạng máy tính trong một quốc gia được liên kết với nhau",
+        "correct":"C"
+    },
+    {
+        "id":202,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Phát biểu nào sau đây là sai?",
+        "option_a":"WWW là từ viết tắt của World Wide Web",
+        "option_b":"Chúng ta có thể đăng ký để sử dụng thư miễn phí tại địa chỉ MAIL.YAHOO.COM",
+        "option_c":"Internet là dịch vụ do công ty Internet tại Mỹ điều hành và thu phí",
+        "option_d":"Thư điện tử là nền tảng cho việc xây dựng văn phòng không giấy tờ",
+        "correct":"C"
+    },
+    {
+        "id":203,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Thứ tự kết nối Internet theo đường quay số theo bạn là?",
+        "option_a":"Máy tính - điện thoại - modem - ISP (Internet Service Provider)",
+        "option_b":"Máy tính - ISP - điện thoại - modem",
+        "option_c":"Máy tính - modem - điện thoại - ISP",
+        "option_d":"Máy tính - điện thoại - ISP - modem",
+        "correct":"C"
+    },
+    {
+        "id":204,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"ISP là viết tắt của",
+        "option_a":"Internet Service Provider",
+        "option_b":"Internet Server Provider",
+        "option_c":"Internet Super Provider",
+        "option_d":"Không có phương án đúng",
+        "correct":"A"
+    },
+    {
+        "id":205,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"WWW là viết tắt của?",
+        "option_a":"Word Wide Wed",
+        "option_b":"Word Wide Website",
+        "option_c":"Word Wild Web",
+        "option_d":"World Wide Web",
+        "correct":"D"
+    },
+    {
+        "id":206,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Mỗi thiết bị khi tham gia vào một mạng máy tính nào đó cũng đều có",
+        "option_a":"Địa chỉ IP",
+        "option_b":"Địa chỉ nhà",
+        "option_c":"Mã sản phẩm",
+        "option_d":"GPS",
+        "correct":"A"
+    },
+    {
+        "id":207,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"HTTP là gì?",
+        "option_a":"Là giao thức truyền tải siêu văn bản",
+        "option_b":"Là ngôn ngữ để soạn thảo nội dung các trang Web",
+        "option_c":"Là tên của trang web",
+        "option_d":"Là địa chỉ của trang Web",
+        "correct":"A"
+    },
+    {
+        "id":208,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Địa chỉ nào không phải là địa chỉ trang web?",
+        "option_a":"ninhbinh@yahoo.com",
+        "option_b":"www.laodong.com.vn",
+        "option_c":"ngoisao.net",
+        "option_d":"mail.yahoo.com",
+        "correct":"A"
+    },
+    {
+        "id":209,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Đâu là định nghĩa đúng nhất về trang Web?",
+        "option_a":"Là trang văn bản thông thường",
+        "option_b":"Là trang siêu văn bản phối hợp giữa văn bản thông thường với hình ảnh, âm thanh, video và cả các mối liên kết đến các trang siêu văn bản khác",
+        "option_c":"Là trang văn bản chứa các liên kết cơ sở dữ liệu ở bên trong nó",
+        "option_d":"Là trang văn bản chứa văn bản, hình ảnh",
+        "correct":"B"
+    },
+    {
+        "id":210,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"\"Link\" trên trang web có nghĩa là?",
+        "option_a":"Liên kết đến 1 trang web khác",
+        "option_b":"Liên kết đến 1 liên kết khác",
+        "option_c":"Liên kết",
+        "option_d":"Tất cả đều đúng",
+        "correct":"B"
+    },
+    {
+        "id":211,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Đây là cụm từ viết tắt của địa chỉ tài nguyên trên Internet?",
+        "option_a":"URL (Universe Resource Internet)",
+        "option_b":"URL (Uniform Resource Location)",
+        "option_c":"URL (Uniform Resource Locator)",
+        "option_d":"Tất cả các đáp án đều đúng",
+        "correct":"C"
+    },
+    {
+        "id":212,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Đâu là định nghĩa siêu liên kết?",
+        "option_a":"Dùng liên kết các tài nguyên trên Internet qua các đường link trên trang Web",
+        "option_b":"Dùng tải các ứng dụng trên Internet xuống",
+        "option_c":"Dùng liên kết với các tài liệu trên Internet",
+        "option_d":"Dùng liên kết các đường dẫn trong một website",
+        "correct":"A"
+    },
+    {
+        "id":213,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Thuật ngữ nào dùng để chỉ các trang tin tức trên mạng?",
+        "option_a":"Website",
+        "option_b":"Trình duyệt Web",
+        "option_c":"Tên miền .net",
+        "option_d":"Webserver",
+        "correct":"A"
+    },
+    {
+        "id":214,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Internet Explorer là gì?",
+        "option_a":"Trình duyệt web",
+        "option_b":"1 chuẩn mạng cục bộ",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"A"
+    },
+    {
+        "id":215,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Mozilla Firefox là gì?",
+        "option_a":"Trình duyệt web",
+        "option_b":"1 chuẩn mạng cục bộ",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"A"
+    },
+    {
+        "id":216,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Google Chrome là gì?",
+        "option_a":"1 chuẩn mạng cục bộ",
+        "option_b":"Trình duyệt web",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"B"
+    },
+    {
+        "id":217,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Opera là gì?",
+        "option_a":"Trình duyệt web",
+        "option_b":"1 chuẩn mạng cục bộ",
+        "option_c":"Bộ giao thức",
+        "option_d":"Thiết bị kết nối các mạng trên Internet",
+        "correct":"A"
+    },
+    {
+        "id":218,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Chương trình được sử dụng để xem các trang Web được gọi là gì?",
+        "option_a":"Trình duyệt Web",
+        "option_b":"Bộ duyệt Web",
+        "option_c":"Chương trình xem Web",
+        "option_d":"Phần mềm xem Web",
+        "correct":"A"
+    },
+    {
+        "id":219,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Để xem một trang Web, ta cần gõ địa chỉ của trang đó vào đâu?",
+        "option_a":"Thanh công cụ chuẩn của trình duyệt",
+        "option_b":"Thanh địa chỉ của trình duyệt",
+        "option_c":"Thanh liên kết của trình duyệt",
+        "option_d":"Thanh trạng thái của trình duyệt",
+        "correct":"B"
+    },
+    {
+        "id":220,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Muốn  xem được  trang  web, máy tính của bạn cần phải cài đặt",
+        "option_a":"Outlook  Express",
+        "option_b":"Một chương  trình  duyệt  web",
+        "option_c":"MS-FronPage",
+        "option_d":"MS-Word",
+        "correct":"B"
+    },
+    {
+        "id":221,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Phần mềm nào sau đây không phải là trình duyệt Web",
+        "option_a":"Internet Explorer",
+        "option_b":"FireBug",
+        "option_c":"Firefox",
+        "option_d":"Chromium",
+        "correct":"B"
+    },
+    {
+        "id":222,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Phát biểu nào sau là đúng về Mozilla Firefox và Chromium 50  0. Chỉ có Mozilla Firefox là trình duyệt web",
+        "option_a":"Chỉ có Chromium là trình duyệt web",
+        "option_b":"Mozilla Firefox và Chromium là các trình duyệt web",
+        "option_c":"Mozila Firefox là trình duyệt web còn Chromium là phần mềm tìm kiếm",
+        "option_d":null,
+        "correct":"B"
+    },
+    {
+        "id":223,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Nút nào trên thanh công cụ của trình duyệt web cho phép bạn tìm kiếm thông tin trên WWW?",
+        "option_a":"Home",
+        "option_b":"Search",
+        "option_c":"Refresh",
+        "option_d":"Next",
+        "correct":"B"
+    },
+    {
+        "id":224,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Tường lửa là gì?",
+        "option_a":"Một hệ thống được xây dựng để đảm bảo an ninh cho công ty",
+        "option_b":"Tường lửa là một thiết bị phần cứng và\/hoặc một phần mềm hoạt động trong một môi trường má y tính nối mạng có mục đích chống lại sự xâm nhập trái phép từ Internet",
+        "option_c":"Một hệ thống báo cháy",
+        "option_d":"Một hệ thống bảo mật thông tin",
+        "correct":"B"
+    },
+    {
+        "id":225,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Dấu hiệu nhận biết một website an toàn?",
+        "option_a":"Giao diện đẹp, chức năng và menu có sắp thứ tự",
+        "option_b":"Sử dụng giao thức bảo mật để truyền tải nội dung",
+        "option_c":"Có logo chứng nhận bảo mật trên website",
+        "option_d":"Có địa chỉ công ty xây dựng website",
+        "correct":"B"
+    },
+    {
+        "id":226,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trình duyệt web không thể hiển thị trang web yêu cầu, có thể do:",
+        "option_a":"Địa chỉ truy cập không tồn tại hoặc địa chỉ truy cập bị nhà quản trị mạng ngăn không cho truy cập",
+        "option_b":"Địa chỉ truy cập không nằm trên máy chủ của Việt Nam",
+        "option_c":"Địa chỉ truy cập không được lưu vào bộ nhớ đệm của trình duyệt",
+        "option_d":"Địa chỉ truy cập là một trang web cá nhân",
+        "correct":"A"
+    },
+    {
+        "id":227,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Phát biểu nào dưới đây là sai?",
+        "option_a":"Mở nhiều cửa sổ duyệt web cho nhiều địa chỉ web khác nhau.",
+        "option_b":"Vừa mở cửa sổ duyệt web, vừa chơi game trong lúc chờ trang web xuất hiện đầy đủ nội dung.",
+        "option_c":"Nhấn nút BACK để đóng cửa sổ duyệt Web.",
+        "option_d":"Nhấn nút REFRESH là để bắt đầu lại quá trình tải trang web từ máy phục vụ về máy cá nhân của người dùng.",
+        "correct":"C"
+    },
+    {
+        "id":228,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Các thành phần của tên miền được phân cách bằng ký tự gì?",
+        "option_a":"Dấu “.”",
+        "option_b":"Dấu “,”",
+        "option_c":"Dấu “#”",
+        "option_d":"Dấu \";\"",
+        "correct":"A"
+    },
+    {
+        "id":229,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Để truy cập vào một trang Web chúng ta cần phải biết:",
+        "option_a":"Địa chỉ của trang web",
+        "option_b":"Hệ điều hành đang sử dụng",
+        "option_c":"Trang web đó của nước nào",
+        "option_d":"Tất cả đều sai",
+        "correct":"A"
+    },
+    {
+        "id":230,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Để truy cập vào một Website ta phải biết",
+        "option_a":"IP của của máy tính",
+        "option_b":"Tên miền của Website đó",
+        "option_c":"Website đó được đặt tại máy chủ nào",
+        "option_d":"Tất cả đều sai",
+        "correct":"B"
+    },
+    {
+        "id":231,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Địa chỉ nào không phải là địa chỉ trang web?",
+        "option_a":"www.laodong.com.vn",
+        "option_b":"ngoisao.net",
+        "option_c":"ninhbinh@yahoo.com",
+        "option_d":"mail.yahoo.com",
+        "correct":"C"
+    },
+    {
+        "id":232,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt để thêm một Tab?",
+        "option_a":"Ctrl+T",
+        "option_b":"Ctrl+N",
+        "option_c":"Alt+N",
+        "option_d":"Alt+H",
+        "correct":"A"
+    },
+    {
+        "id":233,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt chuyển đến Tab liền kề bên trái?",
+        "option_a":"Ctrl+Shift+Tab",
+        "option_b":"Ctrl+Tab",
+        "option_c":"Alt+Tab",
+        "option_d":"Alt+Shift+Tab",
+        "correct":"A"
+    },
+    {
+        "id":234,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt chuyển đến Tab liền kề bên phải?",
+        "option_a":"Ctrl+Shift+Tab",
+        "option_b":"Alt+Tab",
+        "option_c":"Ctrl+Tab",
+        "option_d":"Alt+Shift+Tab",
+        "correct":"C"
+    },
+    {
+        "id":235,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt Ctrl + Tab dùng để làm gì?",
+        "option_a":"Chuyển đến Tab liền kề bên phải",
+        "option_b":"Thêm 1 tab mới",
+        "option_c":"Trở về trang chủ",
+        "option_d":"Thoát khỏi trình duyệt web",
+        "correct":"A"
+    },
+    {
+        "id":236,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới  hơn, phím tắt để đóng một Tab?",
+        "option_a":"Ctrl+Q",
+        "option_b":"Ctrl+W",
+        "option_c":"Ctrl+C",
+        "option_d":"Ctrl+F4",
+        "correct":"B"
+    },
+    {
+        "id":237,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Trong Internet Explorer phiên bản 7 hoặc mới hơn, phím tắt Ctrl + W dùng để làm gì?",
+        "option_a":"Thêm 1 tab mới",
+        "option_b":"Trở về trang chủ",
+        "option_c":"Thoát khỏi trình duyệt web",
+        "option_d":"Xóa 1 tab",
+        "correct":"D"
+    },
+    {
+        "id":238,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Nút nào trên thanh công cụ của trình duyệt web cho phép tải lại một trang web?",
+        "option_a":"Home",
+        "option_b":"Back",
+        "option_c":"Next",
+        "option_d":"Refresh",
+        "correct":"D"
+    },
+    {
+        "id":239,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Nút Refresh trên thanh công cụ của trình duyệt Web cho phép?",
+        "option_a":"Tải lại một trang web",
+        "option_b":"Đi đến một trang web khác",
+        "option_c":"Trở về trang chủ",
+        "option_d":"Thoát khỏi trình duyệt web",
+        "correct":"A"
+    },
+    {
+        "id":240,
+        "module":"MODULE  06: SỬ DỤNG  INTERNET  CƠ BẢN",
+        "question":"Để ngừng tải nội dung một trang Web từ máy chủ, kích chuột tại nút nào sau đây trong cửa sổ trình duyệt?",
+        "option_a":"Stop",
+        "option_b":"Disconnect",
+        "option_c":"End",
+        "option_d":"Start ÔN TẬP  PHẦN  THI THỰC  HÀNH Phần  1: Windows",
+        "correct":"A"
     }
-    
-    // Parse complete row
-    const values = [];
-    let current = '';
-    let inQuotes = false;
-    
-    for (let j = 0; j < currentLine.length; j++) {
-      const char = currentLine[j];
-      if (char === '"') {
-        inQuotes = !inQuotes;
-      } else if (char === ',' && !inQuotes) {
-        values.push(current.trim().replace(/^"|"$/g, ''));
-        current = '';
-      } else {
-        current += char;
-      }
-    }
-    values.push(current.trim().replace(/^"|"$/g, ''));
-    
-    const row = {};
-    headers.forEach((header, i) => {
-      row[header] = values[i] || '';
-    });
-    
-    if (row.id) data.push(row);
-    currentLine = '';
-  }
-  
-  return data;
-}
-
-// Load CSV
-fetch('quiz_data.csv')
-  .then(response => {
-    if (!response.ok) throw new Error('Failed to load quiz data');
-    return response.text();
-  })
-  .then(data => {
-    const csvData = parseCSV(data);
-    QUIZ_DATA = csvData.map(row => ({
-      id: row.id,
-      module: row.module,
-      question: row.question,
-      option_a: row.option_a,
-      option_b: row.option_b,
-      option_c: row.option_c,
-      option_d: row.option_d,
-      correct: row.correct.toUpperCase().trim()
-    }));
-    
-    console.log(`✅ Loaded ${QUIZ_DATA.length} questions`);
-    showMenu();
-  })
-  .catch(error => {
-    console.error('❌ Error loading quiz:', error);
-    alert('Failed to load quiz data. Please refresh the page.');
-  });
+]
