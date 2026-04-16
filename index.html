@@ -279,6 +279,8 @@ async function loadQuizData() {
     console.error('Lỗi:', error);
     alert('Lỗi khi tải dữ liệu câu hỏi. Vui lòng kiểm tra file quiz_data.json');
   }
+ // MODULES
+  const MODULES = [...new Set(QUIZ_DATA.map(q => q.module))];
 }
 // State
 let state = {
@@ -311,9 +313,6 @@ function updateHomeStats() {
     btn.style.display = 'none';
   }
 }
-
-// MODULES
-const MODULES = [...new Set(QUIZ_DATA.map(q => q.module))];
 
 function showMenu() {
   hideAll();
