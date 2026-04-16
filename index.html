@@ -53,7 +53,7 @@
   .quiz-header-back { background: none; border: none; cursor: pointer; font-size: 20px; color: #666; padding: 4px; }
   .quiz-header-info { flex: 1; }
   .quiz-title { font-size: 13px; font-weight: 700; color: #1a56db; }
-  .quiz-mode { font-size: 11px; color: #888; }
+  .quiz-mode { font-size: 11pox; color: #888; }
   .quiz-counter { font-size: 13px; font-weight: 600; color: #555; white-space: nowrap; }
   .progress-bar { height: 4px; background: #e8eef5; }
   .progress-fill { height: 100%; background: #1a56db; transition: width 0.3s; }
@@ -278,331 +278,322 @@ let state = {
 // Persistent storage (localStorage)
 function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } }
 function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
-function loadQuiz() {
+// 1. Khởi tạo biến dữ liệu rỗng
+let QUIZ_DATA = [];
+const csvUrl = 'quiz_data.csv'; // Đảm bảo file csv nằm cùng thư mục với index.html
+
+// 2. State của ứng dụng
+let state = {
+    mode: '',
+    queue: [],
+    currentIdx: 0,
+    correct: 0,
+    wrongInSession: [],
+    answered: false,
+    selectedModules: [],
+    lastSameQueue: []
+};
+
+// 3. Hàm tải dữ liệu từ CSV (Sử dụng PapaParse)
+function initApp() {
     Papa.parse(csvUrl, {
         download: true,
-        header: true, // Tự động lấy dòng đầu tiên làm tên cột
+        header: true,
+        skipEmptyLines: true,
         complete: function(results) {
-            const data = results.data;
-            displayQuestions(data);
+            QUIZ_DATA = results.data;
+            console.log("Đã tải dữ liệu:", QUIZ_DATA.length, "câu hỏi.");
+            
+            // Sau khi tải xong dữ liệu mới khởi tạo các thành phần khác
+            updateHomeStats();
+            // Cập nhật lại số lượng câu hỏi hiển thị trên giao diện
+            document.getElementById('stat-total').textContent = QUIZ_DATA.length;
+            const pDescription = document.querySelector('.menu-card p');
+            if (pDescription) {
+                pDescription.textContent = `${QUIZ_DATA.length} câu hỏi trắc nghiệm • ${[...new Set(QUIZ_DATA.map(q => q.module))].length} modules`;
+            }
         },
         error: function(err) {
-            console.error("Lỗi khi tải CSV:", err);
-            document.getElementById('quiz-container').innerText = "Không thể tải dữ liệu.";
+            console.error("Lỗi tải CSV:", err);
+            alert("Không thể tải file quiz_data.csv. Hãy đảm bảo bạn đang dùng Live Server!");
         }
     });
 }
+
+// 4. Các hàm lưu trữ (localStorage)
+function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } }
+function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
+
 let wrongIds = load('wrongIds') || [];
-let checkpoint = load('checkpoint') || null; // { queueIds: [], idx: number }
+let checkpoint = load('checkpoint') || null;
 let doneIds = load('doneIds') || [];
 
 function updateHomeStats() {
-  document.getElementById('stat-done').textContent = doneIds.length;
-  document.getElementById('stat-wrong').textContent = wrongIds.length;
-  const btn = document.getElementById('btn-redo-wrong');
-  if (wrongIds.length > 0) {
-    btn.style.display = 'flex';
-    document.getElementById('wrong-count-label').textContent = wrongIds.length + ' câu cần ôn lại';
-  } else {
-    btn.style.display = 'none';
-  }
+    document.getElementById('stat-done').textContent = doneIds.length;
+    document.getElementById('stat-wrong').textContent = wrongIds.length;
+    const btn = document.getElementById('btn-redo-wrong');
+    if (wrongIds.length > 0) {
+        btn.style.display = 'flex';
+        document.getElementById('wrong-count-label').textContent = wrongIds.length + ' câu cần ôn lại';
+    } else {
+        btn.style.display = 'none';
+    }
 }
-pen(pdf_path, 'rb') as f:
-        reader = PyPDF2.PdfReader(f)
-        for page in reader.pages:
-            t = page.extr
-// MODULES
-const MODULES = [...new Set(QUIZ_DATA.map(q => q.module))];
+
+// Lấy danh sách Module duy nhất từ dữ liệu đã tải
+function getModules() {
+    return [...new Set(QUIZ_DATA.map(q => q.module))];
+}
 
 function showMenu() {
-  hideAll();
-  document.getElementById('menu').style.display = 'flex';
-  updateHomeStats();
+    hideAll();
+    document.getElementById('menu').style.display = 'flex';
+    updateHomeStats();
 }
 
 function hideAll() {
-  ['menu','module-selector','quiz','results','wrong-view'].forEach(id => {
-    const el = document.getElementById(id);
-    el.style.display = 'none';
-    el.style.flexDirection = '';
-  });
+    ['menu','module-selector','quiz','results','wrong-view'].forEach(id => {
+        const el = document.getElementById(id);
+        el.style.display = 'none';
+        el.style.flexDirection = '';
+    });
 }
 
 function showModuleSelector(mode) {
-  state.mode = mode;
-  hideAll();
-  const sel = document.getElementById('module-selector');
-  sel.style.display = 'flex';
-  sel.style.flexDirection = 'column';
-  
-  const list = document.getElementById('module-list');
-  list.innerHTML = '';
-  MODULES.forEach(m => {
-    const count = QUIZ_DATA.filter(q => q.module === m).length;
-    const div = document.createElement('div');
-    div.className = 'module-option';
-    div.innerHTML = `<input type="checkbox" id="mod_${m}" value="${m}"><label for="mod_${m}">${m}</label><span class="module-count">${count} câu</span>`;
-    div.querySelector('input').addEventListener('change', e => {
-      div.classList.toggle('selected', e.target.checked);
+    state.mode = mode;
+    hideAll();
+    const sel = document.getElementById('module-selector');
+    sel.style.display = 'flex';
+    sel.style.flexDirection = 'column';
+    
+    const list = document.getElementById('module-list');
+    list.innerHTML = '';
+    const modules = getModules();
+    modules.forEach(m => {
+        const count = QUIZ_DATA.filter(q => q.module === m).length;
+        const div = document.createElement('div');
+        div.className = 'module-option';
+        div.innerHTML = `<input type="checkbox" id="mod_${m}" value="${m}"><label for="mod_${m}">${m}</label><span class="module-count">${count} câu</span>`;
+        div.querySelector('input').addEventListener('change', e => {
+            div.classList.toggle('selected', e.target.checked);
+        });
+        list.appendChild(div);
     });
-    list.appendChild(div);
-  });
 }
 
 function startSelectedModules() {
-  const checked = [...document.querySelectorAll('#module-list input:checked')].map(el => el.value);
-  if (checked.length === 0) { alert('Vui lòng chọn ít nhất một module!'); return; }
-  state.selectedModules = checked;
-  startMode(state.mode);
+    const checked = [...document.querySelectorAll('#module-list input:checked')].map(el => el.value);
+    if (checked.length === 0) { alert('Vui lòng chọn ít nhất một module!'); return; }
+    state.selectedModules = checked;
+    startMode(state.mode);
 }
 
 function startMode(mode) {
-  state.mode = mode;
-  state.correct = 0;
-  state.wrongInSession = [];
-  state.answered = false;
-  
-  let queue = [];
-  
-  if (mode === 'shuffle') {
-    queue = shuffle([...QUIZ_DATA]);
-  } else if (mode === 'study') {
-    // Check checkpoint
-    if (checkpoint && checkpoint.queueIds && checkpoint.idx > 0) {
-      const resume = confirm(`Bạn có checkpoint tại câu ${checkpoint.idx + 1}/${checkpoint.queueIds.length}. Tiếp tục từ đó?`);
-      if (resume) {
-        queue = checkpoint.queueIds.map(id => QUIZ_DATA.find(q => q.id === id)).filter(Boolean);
-        state.currentIdx = checkpoint.idx;
-        state.queue = queue;
-        startQuiz();
-        return;
-      }
+    state.mode = mode;
+    state.correct = 0;
+    state.wrongInSession = [];
+    state.answered = false;
+    
+    let queue = [];
+    
+    if (mode === 'shuffle') {
+        queue = shuffle([...QUIZ_DATA]);
+    } else if (mode === 'study') {
+        if (checkpoint && checkpoint.queueIds && checkpoint.idx > 0) {
+            const resume = confirm(`Bạn có checkpoint tại câu ${checkpoint.idx + 1}/${checkpoint.queueIds.length}. Tiếp tục từ đó?`);
+            if (resume) {
+                queue = checkpoint.queueIds.map(id => QUIZ_DATA.find(q => q.id == id)).filter(Boolean);
+                state.currentIdx = checkpoint.idx;
+                state.queue = queue;
+                startQuiz();
+                return;
+            }
+        }
+        queue = [...QUIZ_DATA];
+        state.currentIdx = 0;
+        saveCheckpoint(queue, 0);
+    } else if (mode === 'module') {
+        queue = QUIZ_DATA.filter(q => state.selectedModules.includes(q.module));
+    } else if (mode === 'wrong') {
+        queue = QUIZ_DATA.filter(q => wrongIds.includes(q.id));
+        if (queue.length === 0) { alert('Không có câu sai nào!'); return; }
+        queue = shuffle(queue);
     }
-    queue = [...QUIZ_DATA]; // sequential
+    
+    state.queue = queue;
     state.currentIdx = 0;
-    saveCheckpoint(queue, 0);
-  } else if (mode === 'module') {
-    queue = QUIZ_DATA.filter(q => state.selectedModules.includes(q.module));
-  } else if (mode === 'wrong') {
-    queue = QUIZ_DATA.filter(q => wrongIds.includes(q.id));
-    if (queue.length === 0) { alert('Không có câu sai nào!'); return; }
-    queue = shuffle(queue);
-  }
-  
-  state.queue = queue;
-  state.currentIdx = 0;
-  state.lastSameQueue = queue.map(q => q.id);
-  startQuiz();
+    state.lastSameQueue = queue.map(q => q.id);
+    startQuiz();
 }
 
 function saveCheckpoint(queue, idx) {
-  checkpoint = { queueIds: queue.map(q => q.id), idx };
-  save('checkpoint', checkpoint);
+    checkpoint = { queueIds: queue.map(q => q.id), idx };
+    save('checkpoint', checkpoint);
 }
 
 function startQuiz() {
-  hideAll();
-  const quiz = document.getElementById('quiz');
-  quiz.style.display = 'flex';
-  quiz.style.flexDirection = 'column';
-  
-  const modeLabels = { shuffle: '🔀 Ngẫu nhiên', study: '📖 Ôn tập tuần tự', module: '🎯 Theo module', wrong: '🔁 Câu sai' };
-  document.getElementById('quiz-title').textContent = 'Quiz CNTT Cơ Bản';
-  document.getElementById('quiz-mode-label').textContent = modeLabels[state.mode] || '';
-  
-  renderQuestion();
+    hideAll();
+    const quiz = document.getElementById('quiz');
+    quiz.style.display = 'flex';
+    quiz.style.flexDirection = 'column';
+    
+    const modeLabels = { shuffle: '🔀 Ngẫu nhiên', study: '📖 Ôn tập tuần tự', module: '🎯 Theo module', wrong: '🔁 Câu sai' };
+    document.getElementById('quiz-title').textContent = 'Quiz CNTT Cơ Bản';
+    document.getElementById('quiz-mode-label').textContent = modeLabels[state.mode] || '';
+    
+    renderQuestion();
 }
 
 function renderQuestion() {
-  const q = state.queue[state.currentIdx];
-  const total = state.queue.length;
-  
-  document.getElementById('quiz-counter').textContent = `${state.currentIdx + 1}/${total}`;
-  const pct = ((state.currentIdx) / total * 100).toFixed(0);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  
-  document.getElementById('q-module').textContent = q.module;
-  document.getElementById('q-text').textContent = q.question;
-  
-  const opts = ['A', 'B', 'C', 'D'];
-  const optTexts = [q.option_a, q.option_b, q.option_c, q.option_d];
-  
-  const optEl = document.getElementById('q-options');
-  optEl.innerHTML = '';
-  opts.forEach((letter, i) => {
-    const div = document.createElement('div');
-    div.className = 'option';
-    div.innerHTML = `<span class="option-letter">${letter}</span><span>${optTexts[i]}</span>`;
-    div.addEventListener('click', () => selectAnswer(letter, div));
-    optEl.appendChild(div);
-  });
-  
-  document.getElementById('q-feedback').style.display = 'none';
-  document.getElementById('next-btn').style.display = 'none';
-  
-  // Checkpoint banner
-  const banner = document.getElementById('checkpoint-banner');
-  if (state.mode === 'study' && state.currentIdx > 0 && state.currentIdx % 10 === 0) {
-    banner.style.display = 'block';
-    document.getElementById('checkpoint-text').textContent = `Đã lưu tại câu ${state.currentIdx + 1}. Bạn có thể quay lại tiếp tục sau.`;
-    saveCheckpoint(state.queue, state.currentIdx);
-    setTimeout(() => { banner.style.display = 'none'; }, 4000);
-  } else {
-    banner.style.display = 'none';
-  }
-  
-  state.answered = false;
+    const q = state.queue[state.currentIdx];
+    const total = state.queue.length;
+    
+    document.getElementById('quiz-counter').textContent = `${state.currentIdx + 1}/${total}`;
+    const pct = ((state.currentIdx) / total * 100).toFixed(0);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    
+    document.getElementById('q-module').textContent = q.module;
+    document.getElementById('q-text').textContent = q.question;
+    
+    const opts = ['A', 'B', 'C', 'D'];
+    const optTexts = [q.option_a, q.option_b, q.option_c, q.option_d];
+    
+    const optEl = document.getElementById('q-options');
+    optEl.innerHTML = '';
+    opts.forEach((letter, i) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerHTML = `<span class="option-letter">${letter}</span><span>${optTexts[i]}</span>`;
+        div.addEventListener('click', () => selectAnswer(letter, div));
+        optEl.appendChild(div);
+    });
+    
+    document.getElementById('q-feedback').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'none';
+    
+    const banner = document.getElementById('checkpoint-banner');
+    if (state.mode === 'study' && state.currentIdx > 0 && state.currentIdx % 10 === 0) {
+        banner.style.display = 'block';
+        document.getElementById('checkpoint-text').textContent = `Đã lưu tại câu ${state.currentIdx + 1}. Bạn có thể quay lại tiếp tục sau.`;
+        saveCheckpoint(state.queue, state.currentIdx);
+        setTimeout(() => { banner.style.display = 'none'; }, 4000);
+    } else {
+        banner.style.display = 'none';
+    }
+    
+    state.answered = false;
 }
 
 function selectAnswer(letter, clickedEl) {
-  if (state.answered) return;
-  state.answered = true;
-  
-  const q = state.queue[state.currentIdx];
-  const isCorrect = letter === q.correct;
-  const allOpts = document.querySelectorAll('.option');
-  const optMap = { A: 0, B: 1, C: 2, D: 3 };
-  
-  allOpts.forEach(o => o.classList.add('disabled'));
-  
-  clickedEl.classList.add(isCorrect ? 'correct' : 'wrong');
-  if (!isCorrect) {
-    allOpts[optMap[q.correct]].classList.add('correct');
-  }
-  
-  const feedback = document.getElementById('q-feedback');
-  feedback.style.display = 'block';
-  if (isCorrect) {
-    feedback.className = 'feedback correct';
-    feedback.textContent = '✅ Chính xác! Bạn đã trả lời đúng.';
-    state.correct++;
-    // Mark as done
-    if (!doneIds.includes(q.id)) { doneIds.push(q.id); save('doneIds', doneIds); }
-    // Remove from wrong if was wrong
-    wrongIds = wrongIds.filter(id => id !== q.id);
-    save('wrongIds', wrongIds);
-  } else {
-    const optTexts = [q.option_a, q.option_b, q.option_c, q.option_d];
-    const optMap2 = { A: 0, B: 1, C: 2, D: 3 };
-    feedback.className = 'feedback wrong';
-    feedback.textContent = `❌ Sai! Đáp án đúng là ${q.correct}: ${optTexts[optMap2[q.correct]]}`;
-    // Add to wrong
-    if (!wrongIds.includes(q.id)) { wrongIds.push(q.id); save('wrongIds', wrongIds); }
-    state.wrongInSession.push({
-      id: q.id, module: q.module,
-      question: q.question,
-      yourAnswer: letter,
-      yourText: [q.option_a, q.option_b, q.option_c, q.option_d][optMap2[letter]],
-      correctAnswer: q.correct,
-      correctText: optTexts[optMap2[q.correct]]
-    });
-  }
-  
-  const nextBtn = document.getElementById('next-btn');
-  nextBtn.style.display = 'block';
-  const isLast = state.currentIdx === state.queue.length - 1;
-  nextBtn.textContent = isLast ? '📊 Xem kết quả' : 'Câu tiếp theo →';
+    if (state.answered) return;
+    state.answered = true;
+    
+    const q = state.queue[state.currentIdx];
+    const isCorrect = letter === q.correct;
+    const allOpts = document.querySelectorAll('.option');
+    const optMap = { A: 0, B: 1, C: 2, D: 3 };
+    
+    allOpts.forEach(o => o.classList.add('disabled'));
+    clickedEl.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) {
+        allOpts[optMap[q.correct]].classList.add('correct');
+    }
+    
+    const feedback = document.getElementById('q-feedback');
+    feedback.style.display = 'block';
+    if (isCorrect) {
+        feedback.className = 'feedback correct';
+        feedback.textContent = '✅ Chính xác!';
+        state.correct++;
+        if (!doneIds.includes(q.id)) { doneIds.push(q.id); save('doneIds', doneIds); }
+        wrongIds = wrongIds.filter(id => id !== q.id);
+        save('wrongIds', wrongIds);
+    } else {
+        const optTexts = [q.option_a, q.option_b, q.option_c, q.option_d];
+        feedback.className = 'feedback wrong';
+        feedback.textContent = `❌ Sai rồi! Đáp án là ${q.correct}`;
+        if (!wrongIds.includes(q.id)) { wrongIds.push(q.id); save('wrongIds', wrongIds); }
+        state.wrongInSession.push({
+            id: q.id, question: q.question, yourAnswer: letter, correctAnswer: q.correct
+        });
+    }
+    
+    const nextBtn = document.getElementById('next-btn');
+    nextBtn.style.display = 'block';
+    const isLast = state.currentIdx === state.queue.length - 1;
+    nextBtn.textContent = isLast ? '📊 Xem kết quả' : 'Câu tiếp theo →';
 }
 
 function nextQuestion() {
-  if (state.currentIdx < state.queue.length - 1) {
-    state.currentIdx++;
-    if (state.mode === 'study') {
-      saveCheckpoint(state.queue, state.currentIdx);
+    if (state.currentIdx < state.queue.length - 1) {
+        state.currentIdx++;
+        if (state.mode === 'study') saveCheckpoint(state.queue, state.currentIdx);
+        renderQuestion();
+        window.scrollTo(0, 0);
+    } else {
+        showResults();
     }
-    renderQuestion();
-    window.scrollTo(0, 0);
-  } else {
-    showResults();
-  }
 }
 
 function showResults() {
-  hideAll();
-  const res = document.getElementById('results');
-  res.style.display = 'flex';
-  res.style.flexDirection = 'column';
-  
-  const total = state.queue.length;
-  const correct = state.correct;
-  const wrong = total - correct;
-  const pct = Math.round(correct / total * 100);
-  
-  const emojis = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '💪';
-  const titles = pct >= 80 ? 'Xuất sắc!' : pct >= 60 ? 'Khá tốt!' : 'Cố gắng thêm!';
-  
-  document.getElementById('result-emoji').textContent = emojis;
-  document.getElementById('result-title').textContent = titles;
-  document.getElementById('result-subtitle').textContent = `Bạn đã hoàn thành ${total} câu hỏi`;
-  document.getElementById('score-pct').textContent = pct + '%';
-  document.getElementById('score-circle').style.setProperty('--pct', pct * 3.6 + 'deg');
-  document.getElementById('res-correct').textContent = correct;
-  document.getElementById('res-wrong').textContent = wrong;
-  document.getElementById('res-total').textContent = total;
-  
-  // Clear checkpoint on study completion
-  if (state.mode === 'study') {
-    checkpoint = null; save('checkpoint', null);
-  }
-  
-  updateHomeStats();
+    hideAll();
+    const res = document.getElementById('results');
+    res.style.display = 'flex';
+    res.style.flexDirection = 'column';
+    const total = state.queue.length;
+    const correct = state.correct;
+    const pct = Math.round(correct / total * 100);
+    
+    document.getElementById('score-pct').textContent = pct + '%';
+    document.getElementById('score-circle').style.setProperty('--pct', pct * 3.6 + 'deg');
+    document.getElementById('res-correct').textContent = correct;
+    document.getElementById('res-wrong').textContent = total - correct;
+    document.getElementById('res-total').textContent = total;
+    
+    if (state.mode === 'study') { checkpoint = null; save('checkpoint', null); }
+    updateHomeStats();
 }
 
 function restartSame() {
-  // Restart with same questions
-  state.correct = 0;
-  state.wrongInSession = [];
-  state.currentIdx = 0;
-  if (state.mode === 'shuffle' || state.mode === 'wrong') {
-    state.queue = shuffle(state.queue);
-  }
-  startQuiz();
+    state.correct = 0; state.wrongInSession = []; state.currentIdx = 0;
+    if (state.mode === 'shuffle' || state.mode === 'wrong') state.queue = shuffle(state.queue);
+    startQuiz();
 }
 
 function showWrongList() {
-  hideAll();
-  const wv = document.getElementById('wrong-view');
-  wv.style.display = 'block';
-  
-  const wrongQs = QUIZ_DATA.filter(q => wrongIds.includes(q.id));
-  const content = document.getElementById('wrong-list-content');
-  
-  if (wrongQs.length === 0) {
-    content.innerHTML = '<div style="text-align:center;padding:40px;color:#888"><div style="font-size:48px">✨</div><p style="margin-top:12px">Chưa có câu sai nào. Hãy làm bài trước!</p></div>';
-    return;
-  }
-  
-  const optMap = { A: 0, B: 1, C: 2, D: 3 };
-  content.innerHTML = wrongQs.map((q, i) => {
-    const opts = [q.option_a, q.option_b, q.option_c, q.option_d];
-    return `<div class="wrong-item">
-      <div style="font-size:11px;color:#888;margin-bottom:6px">${q.module} • Câu ${q.id}</div>
-      <div class="wrong-q">${i+1}. ${q.question}</div>
-      <div class="wrong-correct">✅ Đáp án đúng: ${q.correct} — ${opts[optMap[q.correct]]}</div>
-    </div>`;
-  }).join('');
+    hideAll();
+    document.getElementById('wrong-view').style.display = 'block';
+    const wrongQs = QUIZ_DATA.filter(q => wrongIds.includes(q.id));
+    const content = document.getElementById('wrong-list-content');
+    if (wrongQs.length === 0) {
+        content.innerHTML = '<p>Chưa có câu sai!</p>';
+        return;
+    }
+    const optMap = { A: 'option_a', B: 'option_b', C: 'option_c', D: 'option_d' };
+    content.innerHTML = wrongQs.map((q, i) => `
+        <div class="wrong-item">
+            <div class="wrong-q">${i+1}. ${q.question}</div>
+            <div class="wrong-correct">✅ Đáp án đúng: ${q.correct} - ${q[optMap[q.correct]]}</div>
+        </div>
+    `).join('');
 }
 
-function confirmExit() {
-  document.getElementById('exit-modal').classList.add('active');
-}
-function closeModal() {
-  document.getElementById('exit-modal').classList.remove('active');
-}
-function forceExit() {
-  closeModal();
-  showMenu();
-}
+function confirmExit() { document.getElementById('exit-modal').classList.add('active'); }
+function closeModal() { document.getElementById('exit-modal').classList.remove('active'); }
+function forceExit() { closeModal(); showMenu(); }
 
 function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }
 
+// 5. Khởi chạy ứng dụng
+initApp();
+showMenu();
 // Init
 showMenu();
 </script>
