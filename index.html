@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz - Chứng Chỉ Ứng Dụng CNTT Cơ Bản</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; min-height: 100vh; color: #222; }
@@ -277,7 +278,20 @@ let state = {
 // Persistent storage (localStorage)
 function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } }
 function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
-
+function loadQuiz() {
+    Papa.parse(csvUrl, {
+        download: true,
+        header: true, // Tự động lấy dòng đầu tiên làm tên cột
+        complete: function(results) {
+            const data = results.data;
+            displayQuestions(data);
+        },
+        error: function(err) {
+            console.error("Lỗi khi tải CSV:", err);
+            document.getElementById('quiz-container').innerText = "Không thể tải dữ liệu.";
+        }
+    });
+}
 let wrongIds = load('wrongIds') || [];
 let checkpoint = load('checkpoint') || null; // { queueIds: [], idx: number }
 let doneIds = load('doneIds') || [];
